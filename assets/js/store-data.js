@@ -1,7 +1,7 @@
 // assets/js/store-data.js
-// All 20 Riff's Department Store locations – Newfoundland & Labrador
+// All 20 Riff's Department Store locations - Newfoundland & Labrador
 // Family-owned since 1939
-// Coordinates verified December 2025 – pin-point accurate
+// Coordinates verified December 2025 - pin-point accurate
 
 export const stores = [
   { name: "Riff's Baie Verte", address: "28 Main St, Baie Verte, NL A0K 1B0, Canada", phone: "(709) 532-8080", google: "https://share.google/pzx0kH1PtYRRtdMFh", coords: { lat: 49.93783716662404, lng: -56.19255211476065 } },

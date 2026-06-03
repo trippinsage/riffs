@@ -1,4 +1,4 @@
-const CACHE_NAME = 'riffs-store-v3';
+const CACHE_NAME = 'riffs-store-v5';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -9,7 +9,7 @@ const urlsToCache = [
   '/assets/img/riffs-red.webp',
   '/assets/img/heritage.webp',
   '/assets/img/challange.webp',
-  '/assets/img/easter-flyer-2026.jpg',
+  '/assets/img/summer-sale.webp',
   '/404.html',
   '/legal.html'
 ];
@@ -20,12 +20,21 @@ self.addEventListener('install', event => {
       return cache.addAll(urlsToCache);
     })
   );
+  self.skipWaiting();
 });
 
 self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
+    caches.match(event.request).then(cachedResponse => {
+      if (cachedResponse) return cachedResponse;
+
+      return fetch(event.request).catch(() => {
+        if (event.request.mode === 'navigate') {
+          return caches.match('/index.html');
+        }
+      });
     })
   );
 });
@@ -41,6 +50,6 @@ self.addEventListener('activate', event => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });

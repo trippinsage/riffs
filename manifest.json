@@ -2,20 +2,24 @@
   "name": "Riff's Department Store",
   "short_name": "Riff's",
   "description": "Shop quality clothing and home goods at Riff's Department Store across 20 Newfoundland & Labrador locations.",
-  "start_url": "/index.html",
+  "id": "https://www.riffs.ca/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "lang": "en-CA",
+  "categories": ["shopping", "business", "lifestyle"],
   "background_color": "#EB1B21",
   "theme_color": "#EB1B21",
   "icons": [
     {
-      "src": "assets/img/riffs-cutout.webp",
+      "src": "assets/img/favicon_io/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/webp"
+      "type": "image/png"
     },
     {
-      "src": "assets/img/riffs-cutout.webp",
+      "src": "assets/img/favicon_io/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/webp"
+      "type": "image/png"
     }
   ]
 }

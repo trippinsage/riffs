@@ -4,29 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Riff's Department Store | Clothing, Footwear &amp; Home Goods — Newfoundland &amp; Labrador</title>
-  <meta name="description" content="Riff's Department Store — Newfoundland & Labrador's trusted family-owned retailer since 1939. Shop clothing, footwear, home goods & more at 20 locations province-wide." />
-  <meta name="keywords" content="Riff's, Riffs, department store, Newfoundland, Labrador, NL, clothing, footwear, workwear, furniture, home goods" />
+  <title>Riff's Department Store | Clothing, Footwear &amp; Home Goods in Newfoundland &amp; Labrador</title>
+  <meta name="description" content="Riff's Department Store is Newfoundland and Labrador's family-owned value retailer since 1939. Find clothing, footwear, workwear, home goods, furniture, weekly savings, and 20 Riff's locations across NL." />
+  <meta name="keywords" content="Riff's, Riffs, Riff's Department Store, Newfoundland department store, Labrador department store, NL clothing store, footwear, workwear, furniture, home goods, Riff's locations" />
   <meta name="author" content="Riff's Department Store" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#EB1B21" />
+  <meta name="application-name" content="Riff's Department Store" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <link rel="canonical" href="https://www.riffs.ca/" />
+  <link rel="preload" as="image" href="/assets/img/summer-sale.webp" imagesrcset="/assets/img/summer-sale.webp" fetchpriority="high" />
 
   <!-- Open Graph -->
   <meta property="og:site_name" content="Riff's Department Store" />
-  <meta property="og:title" content="Riff's Department Store — Serving NL Since 1939" />
-  <meta property="og:description" content="Newfoundland & Labrador's trusted family-owned department store. 20 locations province-wide." />
-  <meta property="og:image" content="https://www.riffs.ca/assets/img/riffs-red.webp" />
+  <meta property="og:title" content="Riff's Summer Sale | June 5 &amp; 6" />
+  <meta property="og:description" content="50% off T-shirts, shorts, and sandals at Riff's during the Summer Sale on Friday and Saturday, June 5 and 6." />
+  <meta property="og:image" content="https://www.riffs.ca/assets/img/summer-sale.webp" />
+  <meta property="og:image:secure_url" content="https://www.riffs.ca/assets/img/summer-sale.webp" />
+  <meta property="og:image:type" content="image/webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1800" />
+  <meta property="og:image:alt" content="Riff's Summer Sale flyer with 50% off T-shirts, shorts, and sandals on June 5 and 6." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.riffs.ca/" />
   <meta property="og:locale" content="en_CA" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Riff's Department Store — Serving NL Since 1939" />
-  <meta name="twitter:description" content="Newfoundland & Labrador's trusted family-owned department store. 20 locations." />
-  <meta name="twitter:image" content="https://www.riffs.ca/assets/img/riffs-red.webp" />
+  <meta name="twitter:title" content="Riff's Summer Sale | June 5 &amp; 6" />
+  <meta name="twitter:description" content="50% off T-shirts, shorts, and sandals at Riff's on Friday and Saturday, June 5 and 6." />
+  <meta name="twitter:image" content="https://www.riffs.ca/assets/img/summer-sale.webp" />
+  <meta name="twitter:image:alt" content="Riff's Summer Sale flyer with 50% off T-shirts, shorts, and sandals on June 5 and 6." />
 
   <!-- Icons -->
   <link rel="icon" href="/assets/img/favicon_io/favicon.ico" />
@@ -61,57 +71,162 @@
   <!-- Custom Styles -->
   <link rel="stylesheet" href="/assets/css/styles.css" />
 
-  <!-- Structured Data: Organization -->
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Riff's Department Store",
-    "url": "https://www.riffs.ca",
-    "logo": "https://www.riffs.ca/assets/img/riffs-red.webp",
-    "foundingDate": "1939",
-    "description": "Newfoundland & Labrador's trusted family-owned department store since 1939.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressRegion": "Newfoundland and Labrador",
-      "addressCountry": "CA"
-    },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "email": "info@riffs.ca",
-      "contactType": "customer service"
-    },
-    "sameAs": [
-      "https://www.facebook.com/riffsdepartmentstore",
-      "https://www.instagram.com/riffsdepartmentstore"
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.riffs.ca/#organization",
+        "name": "Riff's Department Store",
+        "alternateName": ["Riffs", "Riff's"],
+        "url": "https://www.riffs.ca/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.riffs.ca/assets/img/riffs-red.webp"
+        },
+        "image": "https://www.riffs.ca/assets/img/riffs-red.webp",
+        "foundingDate": "1939",
+        "description": "Riff's Department Store is a family-owned value retailer serving Newfoundland and Labrador since 1939.",
+        "email": "info@riffs.ca",
+        "telephone": "+1-709-489-5631",
+        "sameAs": [
+          "https://www.facebook.com/riffsdepartmentstore",
+          "https://www.instagram.com/riffsdepartmentstore"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.riffs.ca/#website",
+        "url": "https://www.riffs.ca/",
+        "name": "Riff's Department Store",
+        "publisher": { "@id": "https://www.riffs.ca/#organization" },
+        "inLanguage": "en-CA"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.riffs.ca/#webpage",
+        "url": "https://www.riffs.ca/",
+        "name": "Riff's Department Store | Newfoundland & Labrador",
+        "description": "Find Riff's Department Store locations, current sale details, clothing, footwear, workwear, home goods, furniture, and the story of a family-owned NL retailer since 1939.",
+        "isPartOf": { "@id": "https://www.riffs.ca/#website" },
+        "about": { "@id": "https://www.riffs.ca/#organization" },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://www.riffs.ca/assets/img/summer-sale.webp",
+          "width": 1200,
+          "height": 1800
+        },
+        "inLanguage": "en-CA"
+      },
+      {
+        "@type": "DepartmentStore",
+        "@id": "https://www.riffs.ca/#department-store",
+        "name": "Riff's Department Store",
+        "image": "https://www.riffs.ca/assets/img/riffs-red.webp",
+        "url": "https://www.riffs.ca/",
+        "telephone": "+1-709-489-5631",
+        "email": "info@riffs.ca",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "2 Hardy Avenue",
+          "addressLocality": "Grand Falls-Windsor",
+          "addressRegion": "NL",
+          "postalCode": "A2A 2P9",
+          "addressCountry": "CA"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 48.94998029619504,
+          "longitude": -55.65043277248649
+        },
+        "priceRange": "$$",
+        "foundingDate": "1939",
+        "parentOrganization": { "@id": "https://www.riffs.ca/#organization" },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Newfoundland and Labrador"
+        },
+        "department": [
+          { "@type": "Store", "name": "Clothing" },
+          { "@type": "ShoeStore", "name": "Footwear" },
+          { "@type": "Store", "name": "Workwear" },
+          { "@type": "HomeGoodsStore", "name": "Home Goods" },
+          { "@type": "FurnitureStore", "name": "Furniture" }
+        ]
+      },
+      {
+        "@type": "SaleEvent",
+        "@id": "https://www.riffs.ca/#summer-sale",
+        "name": "Riff's Summer Sale",
+        "description": "Friday and Saturday, June 5 and 6: 50% off T-shirts departments 2, 6, and 8; shorts departments 2, 6, and 8; and sandals department 3.",
+        "image": "https://www.riffs.ca/assets/img/summer-sale.webp",
+        "startDate": "2026-06-05",
+        "endDate": "2026-06-06",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "location": {
+          "@type": "Place",
+          "name": "Participating Riff's Department Store locations",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "NL",
+            "addressCountry": "CA"
+          }
+        },
+        "organizer": { "@id": "https://www.riffs.ca/#organization" },
+        "offers": {
+          "@type": "AggregateOffer",
+          "name": "50% off select summer apparel and sandals",
+          "priceCurrency": "CAD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://www.riffs.ca/"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.riffs.ca/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How many Riff's Department Store locations are there?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Riff's Department Store has 20 family-owned locations across Newfoundland and Labrador."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does Riff's sell?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Riff's sells clothing, footwear, workwear, home goods, furniture, and seasonal everyday essentials."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I find my nearest Riff's store?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the store locator on the Riff's website to choose a store, view its phone number, and open directions."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.riffs.ca/#breadcrumbs",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.riffs.ca/"
+          }
+        ]
+      }
     ]
-  }
-  </script>
-
-  <!-- Structured Data: DepartmentStore -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "DepartmentStore",
-    "name": "Riff's Department Store",
-    "image": "https://www.riffs.ca/assets/img/riffs-red.webp",
-    "url": "https://www.riffs.ca",
-    "telephone": "+1-709-489-5631",
-    "email": "info@riffs.ca",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "2 Hardy Avenue",
-      "addressLocality": "Grand Falls-Windsor",
-      "addressRegion": "NL",
-      "postalCode": "A2A 2P9",
-      "addressCountry": "CA"
-    },
-    "priceRange": "$$",
-    "foundingDate": "1939",
-    "areaServed": {
-      "@type": "AdministrativeArea",
-      "name": "Newfoundland and Labrador"
-    }
   }
   </script>
 
@@ -131,15 +246,10 @@
 
 <body class="font-sans text-gray-800 antialiased min-h-screen flex flex-col">
 
-  <!-- Skip to Content -->
-  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-brand focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
-    Skip to main content
-  </a>
-
   <!-- TOP BANNER -->
   <div class="top-banner">
     <div class="max-w-7xl mx-auto px-4">
-      Family-Owned in NL Since 1939 · 20 Stores Province-Wide
+      Summer Sale June 5 &amp; 6 &middot; 50% Off Select T-Shirts, Shorts &amp; Sandals
     </div>
   </div>
 
@@ -154,8 +264,9 @@
         </a>
 
         <!-- Desktop Nav -->
-        <nav class="hidden md:flex items-center gap-8" aria-label="Primary">
+        <nav class="hidden md:flex items-center gap-6" aria-label="Primary">
           <a href="/" class="text-gray-700 hover:text-brand font-semibold transition-colors">Home</a>
+          <a href="#departments" class="text-gray-700 hover:text-brand font-semibold transition-colors">Departments</a>
           <a href="#locations" class="text-gray-700 hover:text-brand font-semibold transition-colors">Locations</a>
           <a href="#heritage" class="text-gray-700 hover:text-brand font-semibold transition-colors">Our Story</a>
           <a href="mailto:info@riffs.ca" class="bg-brand text-white font-bold px-5 py-2.5 rounded-lg hover:bg-brand-dark transition-colors shadow-sm">
@@ -182,6 +293,7 @@
     <nav id="mobile-menu" class="md:hidden hidden border-t border-gray-100 bg-white" aria-label="Mobile">
       <div class="px-4 py-3 space-y-1">
         <a href="/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-brand-light hover:text-brand font-semibold transition-colors">Home</a>
+        <a href="#departments" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-brand-light hover:text-brand font-semibold transition-colors">Departments</a>
         <a href="#locations" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-brand-light hover:text-brand font-semibold transition-colors">Locations</a>
         <a href="#heritage" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-brand-light hover:text-brand font-semibold transition-colors">Our Story</a>
         <a href="mailto:info@riffs.ca" class="block px-4 py-3 rounded-lg bg-brand text-white font-bold text-center hover:bg-brand-dark transition-colors">Contact Us</a>
@@ -192,9 +304,10 @@
   <main id="main-content">
 
     <!-- ============================================================
-         HERO — DEFAULT (no sale active)
-         Uncomment this block and comment out the SALE HERO below.
-    ============================================================ -->
+         HERO DEFAULT (no sale active)
+         To restore the default hero, uncomment this block and comment
+         out the SUMMER SALE HERO below.
+    ============================================================
     <section id="hero" class="py-16 md:py-28 bg-gradient-to-br from-gray-50 to-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 class="font-black text-5xl sm:text-6xl lg:text-8xl text-brand leading-none">
@@ -204,7 +317,7 @@
           The Value Leader Since 1939
         </p>
         <p class="mt-4 text-base sm:text-lg text-gray-500 max-w-xl mx-auto">
-          Clothing · Footwear · Home Goods · Workwear · Furniture — 20 family-owned locations across Newfoundland &amp; Labrador.
+          Clothing &middot; Footwear &middot; Home Goods &middot; Workwear &middot; Furniture. 20 family-owned locations across Newfoundland &amp; Labrador.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
           <a href="#locations" class="btn">Find Your Store</a>
@@ -212,56 +325,133 @@
         </div>
       </div>
     </section>
-  
+    ============================================================ -->
 
-<!--
-    <section id="hero" class="mothers-day-sale py-14 md:py-20">
+    <!-- ============================================================
+         SUMMER SALE HERO
+         Active sale hero. Comment this block out to restore default.
+    ============================================================ -->
+    <section id="hero" class="summer-sale py-10 md:py-14 lg:py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid gap-10 xl:grid-cols-[1.15fr_0.85fr] xl:items-center">
+        <div class="grid gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(22rem,0.78fr)] lg:items-start">
           <div class="sale-flyer-frame">
             <img
-              src="/assets/img/mothers-day.jpg"
-              alt="Riff's Mother's Day Flash Sale flyer featuring 50% off ladies department, footwear, and housewares from May 7 to May 9, 2026"
-              class="w-full h-auto rounded-[2rem] object-cover"
-              width="720"
-              height="900" />
+              src="/assets/img/summer-sale.webp"
+              alt="Riff's Summer Sale flyer: Friday and Saturday, June 5th and 6th, 50% off T-shirts departments 2, 6, and 8; shorts departments 2, 6, and 8; and sandals department 3"
+              class="sale-flyer-image"
+              width="1200"
+              height="1800"
+              fetchpriority="high" />
           </div>
-
           <div class="sale-copy">
-            <p class="sale-kicker">May 7-9, 2026</p>
-            <h1 class="sale-title">Mother's Day Sale</h1>
-            <p class="sale-lead">
-              Celebrate Mom with a weekend of bright savings in-store at Riff's, from fashion picks to home refreshes.
-            </p>
+            <p class="sale-kicker">Friday &amp; Saturday, June 5th &amp; 6th</p>
+            <h1 class="sale-title">Summer Sale</h1>
 
-            <div class="sale-offers" aria-label="Mother's Day sale offers">
+            <div class="sale-offers" aria-label="Summer sale offers">
               <article class="sale-offer-card">
                 <span class="sale-offer-badge">50% Off</span>
-                <h2>Entire Ladies Dept.</h2>
-                <p>Fresh looks, wardrobe staples, and special finds for Mom.</p>
-                <small>Dept. 2 only</small>
+                <h2>T-Shirts</h2>
+                <p>Basics and casual favourites for the season.</p>
+                <small>Departments 2, 6, and 8</small>
               </article>
 
               <article class="sale-offer-card">
                 <span class="sale-offer-badge">50% Off</span>
-                <h2>Footwear</h2>
-                <p>Step into the long weekend with standout deals on shoes.</p>
-                <small>Dept. 3 only - Excludes Rubber Boots</small>
+                <h2>Shorts</h2>
+                <p>Summer picks for sunny days and fun weekends.</p>
+                <small>Departments 2, 6, and 8</small>
               </article>
 
               <article class="sale-offer-card">
                 <span class="sale-offer-badge">50% Off</span>
-                <h2>Housewares</h2>
-                <p>Pick up practical gifts and cheerful home accents in one trip.</p>
-                <small>Dept. 5 only</small>
+                <h2>Sandals</h2>
+                <p>Footwear for warm beach days and everyday wear.</p>
+                <small>Department 3</small>
               </article>
+            </div>
+
+            <div class="sale-cta-group">
+              <a href="#locations" class="btn">Find Your Store</a>
+              <button id="share-sale-btn" type="button" class="sale-secondary-cta" aria-label="Share the Riff's Summer Sale link">Share Sale</button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
--->
+    <!-- DEPARTMENTS -->
+    <section id="departments" class="py-16 md:py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-10">
+          <h2 class="font-black text-brand mb-4 text-3xl sm:text-4xl md:text-5xl">Shop Everyday Value</h2>
+          <p class="text-lg text-gray-600 leading-relaxed">
+            Riff's brings practical value to communities across Newfoundland and Labrador, with essentials for the whole family and the home.
+          </p>
+        </div>
+
+        <div class="department-grid" aria-label="Riff's department categories">
+          <details class="department-card" open>
+            <summary>
+              <span class="department-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 4l4 3 4-3 4 4-3 3v9H5v-9L2 8l4-4h2z"/><path d="M9 5c.6 1.3 1.6 2 3 2s2.4-.7 3-2"/></svg>
+              </span>
+              <span>Clothing</span>
+            </summary>
+            <p>Family apparel, seasonal basics, casual wear, and everyday wardrobe staples.</p>
+          </details>
+
+          <details class="department-card" open>
+            <summary>
+              <span class="department-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 16c4 0 6-2 8-5l3 3 5 1v3H4v-2z"/><path d="M13 11l2-5 4 6"/></svg>
+              </span>
+              <span>Footwear</span>
+            </summary>
+            <p>Shoes, sandals, boots, and practical picks for work, weather, and weekends.</p>
+          </details>
+
+          <details class="department-card" open>
+            <summary>
+              <span class="department-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M7 21V8a5 5 0 0110 0v13"/><path d="M5 21h14M9 11h6M9 15h6"/></svg>
+              </span>
+              <span>Workwear</span>
+            </summary>
+            <p>Durable clothing and dependable essentials for local work and outdoor days.</p>
+          </details>
+
+          <details class="department-card" open>
+            <summary>
+              <span class="department-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-6h4v6"/></svg>
+              </span>
+              <span>Home Goods</span>
+            </summary>
+            <p>Useful housewares, decor, gifts, and small updates that make home easier.</p>
+          </details>
+
+          <details class="department-card" open>
+            <summary>
+              <span class="department-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 11h14a2 2 0 012 2v5H3v-5a2 2 0 012-2z"/><path d="M7 11V7h10v4M5 18v3M19 18v3"/></svg>
+              </span>
+              <span>Furniture</span>
+            </summary>
+            <p>Selected furniture and home pieces available through local Riff's locations.</p>
+          </details>
+
+          <details class="department-card" open>
+            <summary>
+              <span class="department-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M20 12v8H4v-8"/><path d="M2 7h20v5H2z"/><path d="M12 7v13M7 7a3 3 0 116 0M17 7a3 3 0 10-6 0"/></svg>
+              </span>
+              <span>Local Savings</span>
+            </summary>
+            <p>In-store promotions and seasonal offers built around everyday value.</p>
+          </details>
+        </div>
+      </div>
+    </section>
 
     <!-- MAP & STORE LOCATOR -->
     <section id="locations" class="py-16 md:py-24 bg-white">
@@ -272,15 +462,19 @@
           Choose from 20 family-owned locations across Newfoundland &amp; Labrador.
         </p>
 
-        <div class="flex justify-center mb-8">
+        <div class="store-controls">
           <label for="store-select" class="sr-only">Select a store location</label>
-          <select id="store-select" class="w-full max-w-md p-3.5 rounded-xl border-2 border-gray-300 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none text-base shadow-sm transition-colors">
-            <option value="">— Select a Store —</option>
+          <select id="store-select" class="store-select">
+            <option value="">Select a Store</option>
           </select>
+          <div class="map-actions" aria-label="Map controls">
+            <button id="show-all-stores" type="button">Show All</button>
+            <button id="use-my-location" type="button">Use My Location</button>
+          </div>
         </div>
 
         <div class="relative max-w-5xl mx-auto mb-8">
-          <div id="store-map" class="h-72 sm:h-80 md:h-96 lg:h-[500px] rounded-2xl shadow-xl border-4 border-brand overflow-hidden"></div>
+          <div id="store-map" class="store-map"></div>
 
           <!-- Loading spinner -->
           <div id="map-loading" class="absolute inset-0 bg-white/95 flex items-center justify-center rounded-2xl z-10">
@@ -295,7 +489,7 @@
           </div>
         </div>
 
-        <div id="store-info" class="max-w-2xl mx-auto p-6 md:p-8 bg-white rounded-2xl border-2 border-brand shadow-lg hidden"></div>
+        <div id="store-info" class="store-info hidden"></div>
 
       </div>
     </section>
@@ -321,7 +515,7 @@
           <div class="p-6 md:p-8">
             <h3 class="text-xl sm:text-2xl font-bold text-brand mb-2">Exploring NL Through the Riff's Challenge</h3>
             <p class="text-gray-600 leading-relaxed">
-              Lee Stewart visited every single Riff's store in one epic road trip — and made memories that lasted a lifetime.
+              Lee Stewart visited every single Riff's store in one trip and made memories that lasted a lifetime.
             </p>
           </div>
 
@@ -336,21 +530,21 @@
         <h2 class="font-black text-brand mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Our Story Since 1939</h2>
 
         <p class="text-lg sm:text-xl text-gray-600 leading-relaxed mb-12 max-w-3xl mx-auto">
-          For over <strong class="text-gray-900">85 years</strong>, Riff's has been more than a store — we've been part of the fabric of Newfoundland &amp; Labrador life.
-          Family-owned, community-first, and proudly NL.
+          For over <strong class="text-gray-900">85 years</strong>, Riff's has been part of the fabric of Newfoundland &amp; Labrador life.
+          Family-owned, community-first, and proudly local.
         </p>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
           <div class="bg-gray-50 p-8 rounded-2xl shadow-md border-t-4 border-brand">
-            <h3 class="text-xl sm:text-2xl font-bold text-brand mb-3">1939 — The Beginning</h3>
-            <p class="text-gray-600">A small general store opened in Windsor, Newfoundland — the start of a legacy built on trust and value.</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-brand mb-3">1939: The Beginning</h3>
+            <p class="text-gray-600">A small general store opened in Windsor, Newfoundland and began a legacy built on trust and value.</p>
           </div>
           <div class="bg-gray-50 p-8 rounded-2xl shadow-md border-t-4 border-brand">
-            <h3 class="text-xl sm:text-2xl font-bold text-brand mb-3">1970s–1990s — Growth</h3>
-            <p class="text-gray-600">As communities grew, so did Riff's — opening new stores from coast to coast across the province.</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-brand mb-3">1970s to 1990s: Growth</h3>
+            <p class="text-gray-600">As communities grew, Riff's opened new stores from coast to coast across the province.</p>
           </div>
           <div class="bg-gray-50 p-8 rounded-2xl shadow-md border-t-4 border-brand sm:col-span-2 lg:col-span-1">
-            <h3 class="text-xl sm:text-2xl font-bold text-brand mb-3">Today — 20 Stores Strong</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-brand mb-3">Today: 20 Stores Strong</h3>
             <p class="text-gray-600">Still 100% family-owned. Still committed to quality, value, and the people of NL.</p>
           </div>
         </div>
@@ -394,14 +588,48 @@
       </div>
     </section>
 
+    <!-- FAQ -->
+    <section id="faq" class="py-14 md:py-20 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <h2 class="font-black text-brand mb-4 text-3xl sm:text-4xl md:text-5xl">Frequently Asked Questions</h2>
+          <p class="text-lg text-gray-600">
+            Quick answers for shoppers looking for Riff's stores, departments, and sale information.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <details open>
+            <summary>How many Riff's Department Store locations are there?</summary>
+            <p>Riff's has 20 family-owned locations across Newfoundland and Labrador.</p>
+          </details>
+
+          <details open>
+            <summary>What does Riff's sell?</summary>
+            <p>Riff's carries clothing, footwear, workwear, home goods, furniture, and seasonal everyday essentials.</p>
+          </details>
+
+          <details open>
+            <summary>How can I find my nearest Riff's store?</summary>
+            <p>Use the store locator to select a location, view contact details, and open directions in Google Maps.</p>
+          </details>
+
+          <details open>
+            <summary>How do I ask about a sale item?</summary>
+            <p>Contact your local Riff's store using the phone number in the locator, or email <a href="mailto:info@riffs.ca">info@riffs.ca</a>.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <!-- NEWSLETTER CTA -->
-    <section class="py-16 md:py-20 bg-brand">
+    <section class="newsletter-section">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="font-black text-white text-3xl sm:text-4xl md:text-5xl mb-4">Get Exclusive Savings</h2>
-        <p class="text-white/80 text-lg max-w-xl mx-auto mb-8">
+        <h2 class="font-black text-white text-2xl sm:text-3xl md:text-4xl mb-3">Get Exclusive Savings</h2>
+        <p class="text-white/85 text-base max-w-xl mx-auto mb-6">
           Be the first to know about sales, new arrivals, and special events at your local Riff's store.
         </p>
-        <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto">
+        <div class="newsletter-actions">
           <a href="mailto:info@riffs.ca?subject=Newsletter%20Signup&body=I'd%20like%20to%20sign%20up%20for%20the%20Riff's%20newsletter.%20My%20name%20is%20"
              class="flex-1 inline-flex items-center justify-center gap-2 bg-white text-brand font-bold px-6 py-4 rounded-xl hover:bg-gray-100 transition-colors shadow-lg text-base sm:text-lg">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -433,8 +661,10 @@
         <div class="text-center md:text-left">
           <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-3">Quick Links</h4>
           <div class="flex flex-col gap-2">
+            <a href="#departments" class="text-gray-300 hover:text-white transition-colors text-sm">Departments</a>
             <a href="#locations" class="text-gray-300 hover:text-white transition-colors text-sm">Find a Store</a>
             <a href="#heritage" class="text-gray-300 hover:text-white transition-colors text-sm">Our Story</a>
+            <a href="#faq" class="text-gray-300 hover:text-white transition-colors text-sm">FAQ</a>
             <a href="/legal.html" class="text-gray-300 hover:text-white transition-colors text-sm">Legal &amp; Privacy</a>
           </div>
         </div>

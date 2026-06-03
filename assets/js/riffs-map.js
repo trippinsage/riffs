@@ -1,5 +1,5 @@
 // assets/js/riffs-map.js
-// FINAL VERSION – Elegant pins + info below map + smooth UI/UX
+// Store map, pins, info panel, and location list
 // Proudly family-owned in Newfoundland & Labrador since 1939
 
 import { stores } from "./store-data.js";
@@ -13,6 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadingDiv = document.getElementById("map-loading");
   const locationsList = document.getElementById("locations-list");
   const touchOverlay = document.getElementById("map-touch-overlay");
+  const showAllBtn = document.getElementById("show-all-stores");
+  const useLocationBtn = document.getElementById("use-my-location");
+
+  if (!select || !mapDiv || !infoDiv || !loadingDiv || typeof L === "undefined") {
+    return;
+  }
 
   /* ---------------------------------------------------------
      POPULATE DROPDOWN
@@ -50,17 +56,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       )
       .join("");
+
+    document.dispatchEvent(new CustomEvent("riffs:locations-populated"));
   }
 
   /* ---------------------------------------------------------
-     INIT MAP – scroll/touch disabled until user clicks the map
+     INIT MAP - scroll/touch disabled until user clicks the map
   --------------------------------------------------------- */
   const map = L.map(mapDiv, {
     zoomControl: true,
     scrollWheelZoom: false,
     dragging: !L.Browser.mobile,
     touchZoom: false
-  }).setView([49.2827, -55.875], 6);
+  });
+
+  const provinceBounds = L.latLngBounds(stores.map(store => [store.coords.lat, store.coords.lng]));
+
+  function fitAllStores() {
+    map.fitBounds(provinceBounds, {
+      padding: [36, 36],
+      maxZoom: 7
+    });
+  }
+
+  fitAllStores();
 
   // Enable full interaction only after user clicks inside the map
   mapDiv.addEventListener("click", () => {
@@ -69,6 +88,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (L.Browser.mobile) map.dragging.enable();
     // Remove the tap-to-interact overlay
     if (touchOverlay) touchOverlay.style.display = "none";
+  });
+
+  touchOverlay?.addEventListener("click", () => {
+    touchOverlay.style.display = "none";
   });
 
   // Disable scroll zoom again when mouse leaves the map
@@ -99,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let markers = [];
   let activeMarker = null;
+  let userMarker = null;
 
   /* ---------------------------------------------------------
      ADD MARKERS
@@ -110,9 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
     marker.on("click", () => {
       select.value = i;
       showStoreInfo(i);
-      // Animate marker
-      marker._icon.classList.add("active");
-      setTimeout(() => marker._icon.classList.remove("active"), 900);
+      marker._icon?.classList.add("active");
+      setTimeout(() => marker._icon?.classList.remove("active"), 900);
     });
 
     // Keyboard accessibility for markers
@@ -120,16 +143,16 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.originalEvent.key === "Enter" || e.originalEvent.key === " ") {
         select.value = i;
         showStoreInfo(i);
-        marker._icon.classList.add("active");
-        setTimeout(() => marker._icon.classList.remove("active"), 900);
+        marker._icon?.classList.add("active");
+        setTimeout(() => marker._icon?.classList.remove("active"), 900);
       }
     });
 
     marker.on("mouseover", () => {
-      marker._icon.classList.add("active");
+      marker._icon?.classList.add("active");
     });
     marker.on("mouseout", () => {
-      marker._icon.classList.remove("active");
+      marker._icon?.classList.remove("active");
     });
 
     markers.push(marker);
@@ -141,9 +164,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function showStoreInfo(i) {
     const store = stores[i];
     const marker = markers[i];
+    if (!store || !marker) return;
+
     const telHref = "tel:" + store.phone.replace(/[^+\d]/g, "");
 
-    map.flyTo([store.coords.lat, store.coords.lng], 14, { duration: 1.3 });
+    map.flyTo([store.coords.lat, store.coords.lng], 13, { duration: 1.1 });
 
     // highlight marker
     if (activeMarker) activeMarker.setZIndexOffset(0);
@@ -151,29 +176,23 @@ document.addEventListener("DOMContentLoaded", () => {
     marker.setZIndexOffset(1000);
 
     infoDiv.innerHTML = `
-      <div class="text-center md:text-left">
-        <h3 class="text-2xl md:text-3xl font-black text-red-600 mb-4">${store.name}</h3>
+      <div class="store-info-inner">
+        <h3>${store.name}</h3>
 
-        <div class="space-y-3 text-gray-700 text-base sm:text-lg">
+        <div class="store-detail-grid">
           <p>
-            <strong class="block text-gray-900 mb-1">Address</strong>
+            <strong class="store-detail-label">Address</strong>
             ${store.address}
           </p>
           <p>
-            <strong class="text-gray-900">Phone</strong>
-            <a href="${telHref}" class="ml-2 font-semibold text-brand hover:underline">${store.phone}</a>
+            <strong class="store-detail-label">Phone</strong>
+            <a href="${telHref}" class="font-semibold text-brand hover:underline">${store.phone}</a>
           </p>
         </div>
 
-        <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-          <a href="${store.google}" target="_blank" rel="noopener"
-             class="inline-block bg-red-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-red-700 transition shadow-md">
-            Get Directions
-          </a>
-          <a href="${telHref}"
-             class="inline-block border-2 border-red-600 text-red-600 px-6 py-3 rounded-xl font-bold hover:bg-red-50 transition sm:hidden">
-            Call Store
-          </a>
+        <div class="store-info-actions">
+          <a href="${store.google}" target="_blank" rel="noopener">Get Directions</a>
+          <a href="${telHref}">Call Store</a>
         </div>
       </div>
     `;
@@ -192,21 +211,85 @@ document.addEventListener("DOMContentLoaded", () => {
     const val = select.value;
 
     if (val === "") {
-      // reset view
       infoDiv.classList.add("hidden");
-      map.setView([49.2827, -55.875], 6, { duration: 1.2 });
+      fitAllStores();
 
       if (activeMarker) activeMarker.setZIndexOffset(0);
       activeMarker = null;
     } else {
       showStoreInfo(Number(val));
-      // Animate marker
       if (markers[Number(val)] && markers[Number(val)]._icon) {
         markers[Number(val)]._icon.classList.add("active");
         setTimeout(() => markers[Number(val)]._icon.classList.remove("active"), 900);
       }
     }
   });
+
+  showAllBtn?.addEventListener("click", () => {
+    select.value = "";
+    infoDiv.classList.add("hidden");
+    if (activeMarker) activeMarker.setZIndexOffset(0);
+    activeMarker = null;
+    fitAllStores();
+    map.closePopup();
+  });
+
+  useLocationBtn?.addEventListener("click", () => {
+    if (!navigator.geolocation) {
+      showMapStatus("Location is not available in this browser.");
+      return;
+    }
+
+    useLocationBtn.disabled = true;
+    useLocationBtn.textContent = "Locating";
+
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const userLatLng = L.latLng(position.coords.latitude, position.coords.longitude);
+        const nearest = stores
+          .map((store, index) => ({
+            index,
+            distance: userLatLng.distanceTo([store.coords.lat, store.coords.lng])
+          }))
+          .sort((a, b) => a.distance - b.distance)[0];
+
+        if (userMarker) userMarker.remove();
+        userMarker = L.circleMarker(userLatLng, {
+          radius: 8,
+          color: "#10234a",
+          weight: 3,
+          fillColor: "#ffffff",
+          fillOpacity: 1
+        }).addTo(map);
+
+        if (nearest) {
+          select.value = nearest.index;
+          showStoreInfo(nearest.index);
+          showMapStatus(`Nearest store: ${stores[nearest.index].name}.`);
+        }
+
+        useLocationBtn.disabled = false;
+        useLocationBtn.textContent = "Use My Location";
+      },
+      () => {
+        showMapStatus("We could not access your location. You can still choose a store from the list.");
+        useLocationBtn.disabled = false;
+        useLocationBtn.textContent = "Use My Location";
+      },
+      { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 }
+    );
+  });
+
+  function showMapStatus(message) {
+    let status = document.getElementById("map-status");
+    if (!status) {
+      status = document.createElement("p");
+      status.id = "map-status";
+      status.className = "map-status";
+      mapDiv.parentElement?.appendChild(status);
+    }
+    status.textContent = message;
+  }
 
   /* ---------------------------------------------------------
      HIDE LOADING OVERLAY
