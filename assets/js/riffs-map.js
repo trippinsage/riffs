@@ -20,6 +20,55 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  function createElement(tag, className, text) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (text !== undefined) element.textContent = text;
+    return element;
+  }
+
+  function getTelHref(phone) {
+    return "tel:" + phone.replace(/[^+\d]/g, "");
+  }
+
+  function createDirectionsLink(store, className) {
+    const link = createElement("a", className, "View on Google Maps");
+    link.href = store.google;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
+    const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    icon.setAttribute("class", "w-3.5 h-3.5");
+    icon.setAttribute("fill", "none");
+    icon.setAttribute("stroke", "currentColor");
+    icon.setAttribute("viewBox", "0 0 24 24");
+    icon.setAttribute("aria-hidden", "true");
+
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("stroke-linecap", "round");
+    path.setAttribute("stroke-linejoin", "round");
+    path.setAttribute("stroke-width", "2");
+    path.setAttribute("d", "M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14");
+
+    icon.appendChild(path);
+    link.appendChild(icon);
+    return link;
+  }
+
+  function createLocationCard(store) {
+    const card = createElement("div", "bg-white p-5 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-brand/30 transition text-center");
+    const title = createElement("h3", "text-lg font-bold text-brand mb-1", store.name.replace("Riff's ", ""));
+    const address = createElement("p", "text-gray-600 text-sm mb-1 leading-relaxed", store.address);
+    const phoneWrap = createElement("p", "mb-3");
+    const phoneLink = createElement("a", "text-gray-800 font-semibold text-sm hover:text-brand", store.phone);
+    const mapLink = createDirectionsLink(store, "text-brand hover:text-brand-dark font-semibold text-sm inline-flex items-center gap-1");
+
+    phoneLink.href = getTelHref(store.phone);
+    phoneWrap.appendChild(phoneLink);
+    card.append(title, address, phoneWrap, mapLink);
+    return card;
+  }
+
   /* ---------------------------------------------------------
      POPULATE DROPDOWN
   --------------------------------------------------------- */
@@ -34,28 +83,10 @@ document.addEventListener("DOMContentLoaded", () => {
      POPULATE COLLAPSIBLE LOCATION LIST
   --------------------------------------------------------- */
   if (locationsList) {
-    locationsList.innerHTML = stores
-      .map(
-        store => {
-          const telHref = "tel:" + store.phone.replace(/[^+\d]/g, "");
-          return `
-      <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-brand/30 transition text-center">
-        <h3 class="text-lg font-bold text-brand mb-1">${store.name.replace("Riff's ", "")}</h3>
-        <p class="text-gray-600 text-sm mb-1 leading-relaxed">${store.address}</p>
-        <p class="mb-3"><a href="${telHref}" class="text-gray-800 font-semibold text-sm hover:text-brand">${store.phone}</a></p>
-        <a href="${store.google}" target="_blank" rel="noopener"
-           class="text-brand hover:text-brand-dark font-semibold text-sm inline-flex items-center gap-1">
-          View on Google Maps
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-          </svg>
-        </a>
-      </div>
-    `;
-        }
-      )
-      .join("");
+    locationsList.textContent = "";
+    stores.forEach(store => {
+      locationsList.appendChild(createLocationCard(store));
+    });
 
     document.dispatchEvent(new CustomEvent("riffs:locations-populated"));
   }
@@ -81,18 +112,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fitAllStores();
 
-  // Enable full interaction only after user clicks inside the map
-  mapDiv.addEventListener("click", () => {
+  function enableMapInteraction() {
     map.scrollWheelZoom.enable();
     map.touchZoom.enable();
     if (L.Browser.mobile) map.dragging.enable();
-    // Remove the tap-to-interact overlay
     if (touchOverlay) touchOverlay.style.display = "none";
-  });
+  }
 
-  touchOverlay?.addEventListener("click", () => {
-    touchOverlay.style.display = "none";
-  });
+  // Enable full interaction only after user chooses to interact with the map.
+  mapDiv.addEventListener("click", enableMapInteraction);
+
+  touchOverlay?.addEventListener("click", enableMapInteraction);
 
   // Disable scroll zoom again when mouse leaves the map
   mapDiv.addEventListener("mouseleave", () => {
@@ -166,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const marker = markers[i];
     if (!store || !marker) return;
 
-    const telHref = "tel:" + store.phone.replace(/[^+\d]/g, "");
+    const telHref = getTelHref(store.phone);
 
     map.flyTo([store.coords.lat, store.coords.lng], 13, { duration: 1.1 });
 
@@ -175,27 +205,36 @@ document.addEventListener("DOMContentLoaded", () => {
     activeMarker = marker;
     marker.setZIndexOffset(1000);
 
-    infoDiv.innerHTML = `
-      <div class="store-info-inner">
-        <h3>${store.name}</h3>
+    infoDiv.textContent = "";
 
-        <div class="store-detail-grid">
-          <p>
-            <strong class="store-detail-label">Address</strong>
-            ${store.address}
-          </p>
-          <p>
-            <strong class="store-detail-label">Phone</strong>
-            <a href="${telHref}" class="font-semibold text-brand hover:underline">${store.phone}</a>
-          </p>
-        </div>
+    const inner = createElement("div", "store-info-inner");
+    const title = createElement("h3", "", store.name);
+    const details = createElement("div", "store-detail-grid");
 
-        <div class="store-info-actions">
-          <a href="${store.google}" target="_blank" rel="noopener">Get Directions</a>
-          <a href="${telHref}">Call Store</a>
-        </div>
-      </div>
-    `;
+    const address = createElement("p");
+    address.append(
+      createElement("strong", "store-detail-label", "Address"),
+      document.createTextNode(store.address)
+    );
+
+    const phone = createElement("p");
+    const phoneLink = createElement("a", "font-semibold text-brand hover:underline", store.phone);
+    phoneLink.href = telHref;
+    phone.append(createElement("strong", "store-detail-label", "Phone"), phoneLink);
+
+    const actions = createElement("div", "store-info-actions");
+    const directions = createElement("a", "", "Get Directions");
+    directions.href = store.google;
+    directions.target = "_blank";
+    directions.rel = "noopener noreferrer";
+
+    const callStore = createElement("a", "", "Call Store");
+    callStore.href = telHref;
+
+    details.append(address, phone);
+    actions.append(directions, callStore);
+    inner.append(title, details, actions);
+    infoDiv.appendChild(inner);
 
     infoDiv.classList.remove("hidden");
 

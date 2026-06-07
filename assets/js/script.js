@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const targetId = this.getAttribute("href");
       if (!targetId || targetId === "#") return;
 
-      const target = document.querySelector(targetId);
+      const target = document.getElementById(targetId.slice(1));
       if (!target) return;
 
       event.preventDefault();
@@ -227,38 +227,77 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ==================================================================
-     8. SHARE CURRENT SALE
+     8. NEWSLETTER SIGNUP
   ================================================================== */
-  const shareBtn = document.getElementById("share-sale-btn");
-  if (shareBtn) {
-    const defaultText = shareBtn.textContent;
-    const shareData = {
-      title: "Riff's Summer Sale | June 5 & 6",
-      text: "50% off T-shirts, shorts, and sandals at Riff's on Friday and Saturday, June 5 and 6.",
-      url: window.location.origin + window.location.pathname
+  const newsletterBtn = document.getElementById("newsletter-signup");
+  const newsletterStatus = document.getElementById("newsletter-status");
+  const newsletterFallback = document.getElementById("newsletter-fallback");
+
+  if (newsletterBtn) {
+    const mailchimpSrc = newsletterBtn.dataset.mailchimpSrc;
+    const fallbackHref = newsletterBtn.dataset.fallbackHref || newsletterFallback?.href;
+    const defaultLabel = newsletterBtn.querySelector("span")?.textContent || newsletterBtn.textContent.trim();
+
+    const setNewsletterStatus = message => {
+      if (newsletterStatus) newsletterStatus.textContent = message;
     };
 
-    const flashButtonText = text => {
-      shareBtn.textContent = text;
-      window.setTimeout(() => {
-        shareBtn.textContent = defaultText;
-      }, 1800);
+    const setNewsletterLoading = loading => {
+      newsletterBtn.disabled = loading;
+      const label = newsletterBtn.querySelector("span");
+      if (label) label.textContent = loading ? "Opening Signup" : defaultLabel;
     };
 
-    shareBtn.addEventListener("click", async () => {
-      try {
-        if (navigator.share) {
-          await navigator.share(shareData);
-          return;
-        }
+    const showNewsletterFallback = () => {
+      if (newsletterFallback) newsletterFallback.hidden = false;
+    };
 
-        await navigator.clipboard.writeText(shareData.url);
-        flashButtonText("Link Copied");
-      } catch (error) {
-        if (error?.name !== "AbortError") {
-          window.location.href = `mailto:?subject=${encodeURIComponent(shareData.title)}&body=${encodeURIComponent(`${shareData.text}\n\n${shareData.url}`)}`;
-        }
+    newsletterBtn.addEventListener("click", () => {
+      if (!mailchimpSrc) {
+        showNewsletterFallback();
+        if (fallbackHref) window.location.href = fallbackHref;
+        return;
       }
+
+      const existingScript = document.querySelector("script[data-mailchimp-loader]");
+      if (existingScript) {
+        setNewsletterStatus(existingScript.dataset.loaded === "true" ? "Signup form loaded." : "Signup form is loading.");
+        showNewsletterFallback();
+        return;
+      }
+
+      setNewsletterLoading(true);
+      setNewsletterStatus("Signup form is opening.");
+      newsletterFallback?.setAttribute("hidden", "");
+
+      const script = document.createElement("script");
+      script.src = mailchimpSrc;
+      script.async = true;
+      script.dataset.mailchimpLoader = "true";
+
+      script.addEventListener("load", () => {
+        script.dataset.loaded = "true";
+        setNewsletterLoading(false);
+        setNewsletterStatus("Signup form should appear shortly.");
+        window.setTimeout(() => {
+          const popupVisible = document.querySelector("#PopupSignupForm_0, .mc-modal, .mc-banner, iframe[src*='mailchimp'], iframe[src*='form-assets']");
+          if (!popupVisible) {
+            setNewsletterStatus("Signup form is ready. Use the email fallback if it does not appear.");
+            showNewsletterFallback();
+          } else {
+            setNewsletterStatus("");
+          }
+        }, 4500);
+      });
+
+      script.addEventListener("error", () => {
+        setNewsletterLoading(false);
+        setNewsletterStatus("Signup form could not load.");
+        showNewsletterFallback();
+        if (fallbackHref) window.location.href = fallbackHref;
+      });
+
+      document.body.appendChild(script);
     });
   }
 

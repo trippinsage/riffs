@@ -10,7 +10,11 @@
   <meta name="author" content="Riff's Department Store" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#EB1B21" />
+  <meta name="color-scheme" content="light" />
   <meta name="application-name" content="Riff's Department Store" />
+  <meta name="apple-mobile-web-app-title" content="Riff's" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
@@ -37,13 +41,19 @@
   <meta name="twitter:image:alt" content="Riff's Department Store logo." />
 
   <!-- Icons -->
-  <link rel="icon" href="/assets/img/favicon_io/favicon.ico" />
+  <link rel="icon" href="/assets/img/favicon_io/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon_io/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon_io/favicon-16x16.png" />
   <link rel="apple-touch-icon" href="/assets/img/favicon_io/apple-touch-icon.png" sizes="180x180" />
   <link rel="manifest" href="/manifest.json" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://chimpstatic.com" />
+  <link rel="dns-prefetch" href="https://form-assets.mailchimp.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS v3 -->
@@ -64,7 +74,10 @@
   </script>
 
   <!-- Leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="" />
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="/assets/css/styles.css" />
@@ -207,12 +220,18 @@
     gtag('config', 'G-6D7LSS132Y');
     gtag('config', 'G-FEXN8CGZFF');
   </script>
-
-  <!-- Mailchimp -->
-  <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/9dc28b2766223076ff2308941/26863b36d03e85ab2eba27578.js");</script>
 </head>
 
 <body class="font-sans text-gray-800 antialiased min-h-screen flex flex-col">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-brand focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+    Skip to main content
+  </a>
+
+  <div class="top-banner">
+    <div class="max-w-7xl mx-auto px-4">
+      Family-Owned in NL Since 1939 &middot; 20 Stores Province-Wide
+    </div>
+  </div>
 
   <!-- HEADER -->
   <header class="bg-white sticky top-0 z-40 transition-shadow duration-300">
@@ -265,20 +284,37 @@
   <main id="main-content">
 
     <!-- HERO DEFAULT -->
-    <section id="hero" class="py-16 md:py-28 bg-gradient-to-br from-gray-50 to-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="font-black text-5xl sm:text-6xl lg:text-8xl text-brand leading-none">
-          RIFF'S
-        </h1>
-        <p class="mt-4 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
-          The Value Leader Since 1939
-        </p>
-        <p class="mt-4 text-base sm:text-lg text-gray-500 max-w-xl mx-auto">
-          Clothing &middot; Footwear &middot; Home Goods &middot; Workwear &middot; Furniture. 20 family-owned locations across Newfoundland &amp; Labrador.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#locations" class="btn">Find Your Store</a>
-          <a href="#heritage" class="inline-block border-2 border-brand text-brand font-bold px-6 py-3.5 rounded-xl hover:bg-brand hover:text-white transition-colors text-base sm:text-lg uppercase tracking-wide">Our Story</a>
+    <section id="hero" class="default-hero">
+      <div class="default-hero-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="default-hero-copy">
+          <p class="hero-kicker">Newfoundland &amp; Labrador's value leader</p>
+          <h1>Riff's Department Store</h1>
+          <p class="hero-lead">
+            Clothing, footwear, home goods, workwear, and furniture from a family-owned retailer serving local communities since 1939.
+          </p>
+          <div class="hero-actions">
+            <a href="#locations" class="btn">Find Your Store</a>
+            <a href="#heritage" class="btn btn-secondary">Our Story</a>
+          </div>
+          <dl class="hero-stats" aria-label="Riff's quick facts">
+            <div>
+              <dt>20</dt>
+              <dd>NL locations</dd>
+            </div>
+            <div>
+              <dt>1939</dt>
+              <dd>family-owned since</dd>
+            </div>
+            <div>
+              <dt>5</dt>
+              <dd>core departments</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="default-hero-brand" aria-hidden="true">
+          <img src="/assets/img/riffs-red.webp" alt="" width="560" height="220" />
+          <p>The Value Leader Since 1939</p>
         </div>
       </div>
     </section>
@@ -411,7 +447,7 @@
            target="_blank" rel="noopener noreferrer"
            class="block max-w-2xl mx-auto bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
 
-          <img src="/assets/img/challange.webp"
+          <img src="/assets/img/challenge.webp"
                alt="Lee Stewart completes the Riff's Challenge road trip across Newfoundland"
                class="w-full h-64 sm:h-72 object-cover group-hover:scale-[1.02] transition-transform duration-500"
                loading="lazy" width="700" height="400" />
@@ -476,7 +512,7 @@
 
         <div class="max-w-4xl mx-auto">
 
-          <button id="locations-toggle" aria-expanded="false"
+          <button id="locations-toggle" type="button" aria-expanded="false"
             class="w-full bg-brand text-white font-bold py-4 px-6 rounded-xl text-lg md:text-xl hover:bg-brand-dark transition-colors flex items-center justify-between shadow-md">
             <span>View All 20 Locations</span>
             <svg id="toggle-icon" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -534,17 +570,28 @@
           Be the first to know about sales, new arrivals, and special events at your local Riff's store.
         </p>
         <div class="newsletter-actions">
-          <a href="mailto:info@riffs.ca?subject=Newsletter%20Signup&body=I'd%20like%20to%20sign%20up%20for%20the%20Riff's%20newsletter.%20My%20name%20is%20"
-             class="flex-1 inline-flex items-center justify-center gap-2 bg-white text-brand font-bold px-6 py-4 rounded-xl hover:bg-gray-100 transition-colors shadow-lg text-base sm:text-lg">
+          <button id="newsletter-signup"
+                  type="button"
+                  class="newsletter-primary"
+                  data-mailchimp-src="https://chimpstatic.com/mcjs-connected/js/users/9dc28b2766223076ff2308941/26863b36d03e85ab2eba27578.js"
+                  data-fallback-href="mailto:info@riffs.ca?subject=Newsletter%20Signup&amp;body=I'd%20like%20to%20sign%20up%20for%20the%20Riff's%20newsletter.%20My%20name%20is%20">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-            Sign Up for Deals
-          </a>
+            <span>Sign Up for Deals</span>
+          </button>
           <a href="https://www.facebook.com/riffsdepartmentstore" target="_blank" rel="noopener noreferrer"
-             class="inline-flex items-center justify-center gap-2 bg-white/15 text-white font-bold px-6 py-4 rounded-xl hover:bg-white/25 transition-colors border border-white/30 text-base sm:text-lg">
+             class="newsletter-secondary">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             Follow Us
           </a>
         </div>
+        <p id="newsletter-status" class="newsletter-status" aria-live="polite"></p>
+        <a id="newsletter-fallback"
+           class="newsletter-fallback"
+           href="mailto:info@riffs.ca?subject=Newsletter%20Signup&amp;body=I'd%20like%20to%20sign%20up%20for%20the%20Riff's%20newsletter.%20My%20name%20is%20"
+           hidden>Email us to sign up</a>
+        <p class="newsletter-consent">
+          Signup is handled through Mailchimp. You can unsubscribe at any time. See our <a href="/legal.html#marketing">Legal &amp; Privacy</a> page for details.
+        </p>
       </div>
     </section>
 
@@ -592,7 +639,9 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
   <script src="/assets/js/script.js"></script>
   <script type="module" src="/assets/js/riffs-map.js"></script>
 
