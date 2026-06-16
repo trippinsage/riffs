@@ -1,4 +1,4 @@
-const CACHE_NAME = "riffs-store-v9";
+const CACHE_NAME = "riffs-store-v10";
 const CORE_ASSETS = [
   "/",
   "/index.html",
@@ -10,6 +10,7 @@ const CORE_ASSETS = [
   "/assets/js/riffs-map.js",
   "/assets/js/store-data.js",
   "/assets/img/riffs-red.webp",
+  "/assets/img/fathers-day.webp",
   "/assets/img/heritage.webp",
   "/assets/img/challenge.webp",
   "/assets/img/favicon_io/favicon.ico",
