@@ -7,7 +7,6 @@
   <!-- Primary Meta Tags -->
   <title>404 - Page Not Found | Riff's Department Store Newfoundland & Labrador</title>
   <meta name="description" content="Oops! The page you're looking for can't be found. Return to the Riff's homepage or visit one of our 20 locations across Newfoundland & Labrador." />
-  <meta name="keywords" content="Riff's, Riffs NL, 404 error, page not found, Newfoundland department store" />
   <meta name="robots" content="noindex, follow" />
   <meta name="author" content="Riff's Department Store" />
   <meta name="theme-color" content="#EB1B21" />
@@ -45,19 +44,8 @@
   <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CSS v3 -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: { brand: { DEFAULT: '#EB1B21', dark: '#C3161C', light: '#fff5f5' } },
-          fontFamily: { sans: ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'] },
-        },
-      },
-    }
-  </script>
-
+  <!-- Compiled utility styles -->
+  <link rel="stylesheet" href="/assets/css/tailwind.min.css" />
   <!-- Custom Styles -->
   <link rel="stylesheet" href="/assets/css/styles.css" />
 
@@ -102,8 +90,9 @@
         alt="Historic Riff's Department Store storefront" 
         class="mx-auto max-w-xs md:max-w-sm rounded-lg shadow-lg mb-10"
         loading="lazy"
-        width="400"
-        height="300"
+        decoding="async"
+        width="1000"
+        height="1024"
       />
 
       <!-- Buttons -->

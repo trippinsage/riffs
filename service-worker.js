@@ -1,16 +1,17 @@
-const CACHE_NAME = "riffs-store-v10";
+const CACHE_NAME = "riffs-store-v12";
 const CORE_ASSETS = [
   "/",
   "/index.html",
   "/legal.html",
   "/404.html",
   "/manifest.json",
+  "/assets/css/tailwind.min.css",
   "/assets/css/styles.css",
   "/assets/js/script.js",
   "/assets/js/riffs-map.js",
   "/assets/js/store-data.js",
   "/assets/img/riffs-red.webp",
-  "/assets/img/fathers-day.webp",
+  "/assets/img/background.webp",
   "/assets/img/heritage.webp",
   "/assets/img/challenge.webp",
   "/assets/img/favicon_io/favicon.ico",

@@ -4,9 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Riff's Father's Day Sale | Clothing, Footwear &amp; Home Goods in Newfoundland &amp; Labrador</title>
-  <meta name="description" content="Riff's Father's Day Sale runs Wednesday to Saturday, June 17-20, with 50% off the entire men's department at Riff's locations across Newfoundland and Labrador." />
-  <meta name="keywords" content="Riff's, Riffs, Riff's Department Store, Newfoundland department store, Labrador department store, NL clothing store, footwear, workwear, furniture, home goods, Riff's locations" />
+  <title>Riff's Department Store | Clothing, Home Goods &amp; More in NL</title>
+  <meta name="description" content="Shop clothing, footwear, workwear, home goods, furniture, and everyday essentials at 20 family-owned Riff's locations across Newfoundland and Labrador." />
   <meta name="author" content="Riff's Department Store" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#EB1B21" />
@@ -19,26 +18,28 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <link rel="canonical" href="https://www.riffs.ca/" />
-  <link rel="preload" as="image" href="/assets/img/fathers-day.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="/assets/img/background.webp" type="image/webp" fetchpriority="high" />
 
   <!-- Open Graph -->
   <meta property="og:site_name" content="Riff's Department Store" />
-  <meta property="og:title" content="Riff's Father's Day Sale | Newfoundland &amp; Labrador" />
-  <meta property="og:description" content="Save 50% off the entire men's department during Riff's Father's Day Sale, Wednesday to Saturday, June 17-20." />
-  <meta property="og:image" content="https://www.riffs.ca/assets/img/fathers-day.webp" />
-  <meta property="og:image:secure_url" content="https://www.riffs.ca/assets/img/fathers-day.webp" />
+  <meta property="og:title" content="Riff's Department Store | Newfoundland &amp; Labrador" />
+  <meta property="og:description" content="Clothing, footwear, workwear, home goods, furniture, and everyday value at 20 family-owned locations across Newfoundland and Labrador." />
+  <meta property="og:image" content="https://www.riffs.ca/assets/img/background.webp" />
+  <meta property="og:image:secure_url" content="https://www.riffs.ca/assets/img/background.webp" />
   <meta property="og:image:type" content="image/webp" />
-  <meta property="og:image:alt" content="Riff's Father's Day Sale flyer." />
+  <meta property="og:image:width" content="3012" />
+  <meta property="og:image:height" content="1800" />
+  <meta property="og:image:alt" content="Riff's Department Store logo" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.riffs.ca/" />
   <meta property="og:locale" content="en_CA" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Riff's Father's Day Sale | Newfoundland &amp; Labrador" />
-  <meta name="twitter:description" content="Save 50% off the entire men's department during Riff's Father's Day Sale, Wednesday to Saturday, June 17-20." />
-  <meta name="twitter:image" content="https://www.riffs.ca/assets/img/fathers-day.webp" />
-  <meta name="twitter:image:alt" content="Riff's Father's Day Sale flyer." />
+  <meta name="twitter:title" content="Riff's Department Store | Newfoundland &amp; Labrador" />
+  <meta name="twitter:description" content="Everyday value and local service at 20 family-owned Riff's locations across Newfoundland and Labrador." />
+  <meta name="twitter:image" content="https://www.riffs.ca/assets/img/background.webp" />
+  <meta name="twitter:image:alt" content="Riff's Department Store logo" />
 
   <!-- Icons -->
   <link rel="icon" href="/assets/img/favicon_io/favicon.ico" sizes="any" />
@@ -56,22 +57,8 @@
   <link rel="dns-prefetch" href="https://form-assets.mailchimp.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CSS v3 -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: { DEFAULT: '#EB1B21', dark: '#C3161C', light: '#fff5f5' },
-          },
-          fontFamily: {
-            sans: ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
-          },
-        },
-      },
-    }
-  </script>
+  <!-- Compiled utility styles -->
+  <link rel="stylesheet" href="/assets/css/tailwind.min.css" />
 
   <!-- Leaflet -->
   <link rel="stylesheet"
@@ -227,12 +214,6 @@
     Skip to main content
   </a>
 
-  <div class="top-banner">
-    <div class="max-w-7xl mx-auto px-4">
-      Father's Day Sale &middot; 50% Off the Entire Men's Department &middot; June 17-20
-    </div>
-  </div>
-
   <!-- HEADER -->
   <header class="bg-white sticky top-0 z-40 transition-shadow duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -240,13 +221,12 @@
 
         <!-- Logo -->
         <a href="/" class="flex-shrink-0" aria-label="Riff's Department Store home page">
-          <img src="/assets/img/riffs-red.webp" alt="Riff's Department Store" class="h-10 md:h-14 w-auto" />
+          <img src="/assets/img/riffs-red.webp" alt="Riff's Department Store" class="h-10 md:h-14 w-auto" width="960" height="960" decoding="async" />
         </a>
 
         <!-- Desktop Nav -->
         <nav class="hidden lg:flex items-center gap-6" aria-label="Primary">
           <a href="/" class="text-gray-700 hover:text-brand font-semibold transition-colors">Home</a>
-          <a href="#hero" class="text-gray-700 hover:text-brand font-semibold transition-colors">Father's Day Sale</a>
           <a href="#departments" class="text-gray-700 hover:text-brand font-semibold transition-colors">Departments</a>
           <a href="#locations" class="text-gray-700 hover:text-brand font-semibold transition-colors">Locations</a>
           <a href="#heritage" class="text-gray-700 hover:text-brand font-semibold transition-colors">Our Story</a>
@@ -274,7 +254,6 @@
     <nav id="mobile-menu" class="lg:hidden hidden border-t border-gray-100 bg-white" aria-label="Mobile">
       <div class="px-4 py-3 space-y-1">
         <a href="/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-brand-light hover:text-brand font-semibold transition-colors">Home</a>
-        <a href="#hero" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-brand-light hover:text-brand font-semibold transition-colors">Father's Day Sale</a>
         <a href="#departments" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-brand-light hover:text-brand font-semibold transition-colors">Departments</a>
         <a href="#locations" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-brand-light hover:text-brand font-semibold transition-colors">Locations</a>
         <a href="#heritage" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-brand-light hover:text-brand font-semibold transition-colors">Our Story</a>
@@ -285,15 +264,14 @@
 
   <main id="main-content">
 
-    <!--
-    HERO DEFAULT - commented out while the Father's Day Sale campaign is featured.
-    <section id="hero" class="default-hero">
+    <!-- DEFAULT HERO -->
+    <section id="hero" class="default-hero" aria-labelledby="hero-title">
       <div class="default-hero-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="default-hero-copy">
-          <p class="hero-kicker">Newfoundland &amp; Labrador's value leader</p>
-          <h1>Riff's Department Store</h1>
+          <p class="hero-kicker">Family-owned in Newfoundland &amp; Labrador since 1939</p>
+          <h1 id="hero-title">Everyday value, close to home</h1>
           <p class="hero-lead">
-            Clothing, footwear, home goods, workwear, and furniture from a family-owned retailer serving local communities since 1939.
+            Shop clothing, footwear, workwear, home goods, furniture, and seasonal essentials at 20 Riff's locations across the province.
           </p>
           <div class="hero-actions">
             <a href="#locations" class="btn">Find Your Store</a>
@@ -316,47 +294,9 @@
         </div>
 
         <div class="default-hero-brand" aria-hidden="true">
-          <img src="/assets/img/riffs-red.webp" alt="" width="560" height="220" />
+          <img src="/assets/img/background.webp" alt="" width="3012" height="1800" fetchpriority="high" decoding="async" />
           <p>The Value Leader Since 1939</p>
         </div>
-      </div>
-    </section>
-    -->
-
-    <!-- FATHER'S DAY SALE HERO -->
-    <section id="hero" class="fathers-sale-hero" aria-labelledby="fathers-sale-title">
-      <div class="fathers-sale-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="fathers-sale-copy">
-          <p class="sale-kicker">Father's Day Sale &middot; Wednesday to Saturday</p>
-          <h1 id="fathers-sale-title">Save big on gifts for Dad</h1>
-          <div class="sale-offer" aria-label="50 percent off the entire men's department">
-            <span>50%</span>
-            <strong>off</strong>
-          </div>
-          <p class="sale-lead">
-            For four days only, visit your local Riff's for 50% off the entire men's department, including T-shirts, shorts, jackets, hoodies, and more.
-          </p>
-          <ul class="sale-highlights" aria-label="Father's Day sale details">
-            <li>June 17-20 only</li>
-            <li>Men's department included</li>
-            <li>Available in-store across NL</li>
-          </ul>
-          <div class="sale-actions">
-            <a href="#locations" class="btn">Find Your Nearest Riff's</a>
-            <a href="#all-locations" class="btn sale-outline">View All Locations</a>
-          </div>
-          <p class="sale-note">Bring home a Father's Day win before the sale ends Saturday, June 20.</p>
-        </div>
-
-        <figure class="fathers-sale-flyer">
-          <img
-            src="/assets/img/fathers-day.webp"
-            alt="Riff's Father's Day Sale flyer: 50% off the entire men's department, Wednesday to Saturday, June 17 to 20."
-            width="1600"
-            height="2000"
-            fetchpriority="high" />
-          <figcaption>Official Riff's Father's Day Sale flyer</figcaption>
-        </figure>
       </div>
     </section>
 
@@ -490,8 +430,8 @@
 
           <img src="/assets/img/challenge.webp"
                alt="Lee Stewart completes the Riff's Challenge road trip across Newfoundland"
-               class="w-full h-64 sm:h-72 object-cover group-hover:scale-[1.02] transition-transform duration-500"
-               loading="lazy" width="700" height="400" />
+               class="challenge-image group-hover:scale-[1.02] transition-transform duration-500"
+               loading="lazy" decoding="async" width="1180" height="702" />
 
           <div class="p-6 md:p-8">
             <h3 class="text-xl sm:text-2xl font-bold text-brand mb-2">Exploring NL Through the Riff's Challenge</h3>
@@ -533,7 +473,7 @@
         <img src="/assets/img/heritage.webp"
              alt="Historic Riff's Department Store storefront from the early years"
              class="mx-auto w-full max-w-2xl rounded-2xl shadow-xl object-cover"
-             loading="lazy" width="800" height="500" />
+             loading="lazy" decoding="async" width="1000" height="1024" />
 
         <div class="mt-10">
           <a href="mailto:info@riffs.ca" class="btn inline-block">Get in Touch</a>
@@ -645,7 +585,7 @@
 
         <!-- Brand -->
         <div class="text-center md:text-left">
-          <img src="/assets/img/riffs-red.webp" alt="" class="h-10 mx-auto md:mx-0 mb-3 opacity-80" loading="lazy" />
+          <img src="/assets/img/riffs-red.webp" alt="" class="h-10 w-auto mx-auto md:mx-0 mb-3 opacity-80" loading="lazy" decoding="async" width="960" height="960" />
           <p class="text-gray-400 text-sm max-w-xs mx-auto md:mx-0">Proudly family-owned and serving Newfoundland &amp; Labrador since 1939.</p>
         </div>
 
@@ -680,10 +620,10 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
           crossorigin=""></script>
-  <script src="/assets/js/script.js"></script>
+  <script defer src="/assets/js/script.js"></script>
   <script type="module" src="/assets/js/riffs-map.js"></script>
 
 </body>
