@@ -326,6 +326,20 @@ header.scrolled {
   transform: translateY(-1px);
 }
 
+.map-actions button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+  transform: none;
+}
+
+.location-privacy {
+  max-width: 42rem;
+  margin: -0.75rem auto 1.25rem;
+  color: #6b7280;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
 .store-map {
   height: 18rem;
   border: 1px solid #e5e7eb;
@@ -398,10 +412,13 @@ header.scrolled {
 }
 
 .map-status {
-  margin-top: 0.75rem;
+  min-height: 1.5rem;
+  max-width: 48rem;
+  margin: 0.9rem auto 0;
   color: #4b5563;
   font-size: 0.9rem;
   font-weight: 700;
+  line-height: 1.55;
 }
 
 .map-load-error {
@@ -464,6 +481,8 @@ header.scrolled {
    -------------------------------------------------------------------------- */
 .btn {
   display: inline-block;
+  border: 0;
+  cursor: pointer;
   background: var(--c-brand);
   color: white;
   padding: 0.875rem 2rem;
@@ -1079,6 +1098,199 @@ header.scrolled {
   display: none;
 }
 
+/* --------------------------------------------------------------------------
+   Accessible contact and newsletter previews
+   -------------------------------------------------------------------------- */
+body.dialog-open {
+  overflow: hidden;
+}
+
+.site-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.site-dialog[hidden] {
+  display: none;
+}
+
+.site-dialog-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(17, 24, 39, 0.68);
+  backdrop-filter: blur(3px);
+}
+
+.site-dialog-panel {
+  position: relative;
+  width: min(100%, 32rem);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 14px;
+  padding: 1.5rem;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.32);
+  text-align: left;
+}
+
+.site-dialog-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: inline-grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #374151;
+  cursor: pointer;
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.site-dialog-close:hover {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.site-dialog-kicker {
+  margin: 0 3rem 0.6rem 0;
+  color: var(--c-brand);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-dialog h2 {
+  margin: 0 3rem 0.8rem 0;
+  color: #111827;
+  font-size: clamp(1.65rem, 6vw, 2.2rem);
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.site-dialog-panel > p:not(.site-dialog-kicker) {
+  color: #4b5563;
+  line-height: 1.65;
+}
+
+.contact-email-preview {
+  display: block;
+  margin: 1.25rem 0;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 1rem;
+  background: var(--c-brand-light);
+  color: var(--c-brand);
+  font-size: clamp(1.1rem, 5vw, 1.35rem);
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.site-dialog-note {
+  margin-top: 0.85rem;
+  font-size: 0.84rem;
+}
+
+.site-dialog-actions {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.site-dialog-primary,
+.site-dialog-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+.site-dialog-primary {
+  border: 2px solid var(--c-brand);
+  background: var(--c-brand);
+  color: #fff;
+}
+
+.site-dialog-primary:hover {
+  background: var(--c-brand-dark);
+  border-color: var(--c-brand-dark);
+}
+
+.site-dialog-secondary {
+  border: 2px solid #d1d5db;
+  background: #fff;
+  color: #374151;
+  cursor: pointer;
+}
+
+.newsletter-loader {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 1.25rem auto;
+  border: 4px solid #fee2e2;
+  border-top-color: var(--c-brand);
+  border-radius: 999px;
+  animation: newsletter-spin 0.8s linear infinite;
+}
+
+.newsletter-loader[hidden] {
+  display: none;
+}
+
+.newsletter-dialog-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  margin-top: 1.25rem;
+  border: 2px solid var(--c-brand);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  color: var(--c-brand);
+  font-weight: 900;
+  text-align: center;
+}
+
+.newsletter-dialog-fallback[hidden] {
+  display: none;
+}
+
+@keyframes newsletter-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .newsletter-loader {
+    animation-duration: 1.8s;
+  }
+}
+
+@media (min-width: 480px) {
+  .site-dialog-panel {
+    padding: 2rem;
+  }
+
+  .site-dialog-actions {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
 .newsletter-consent {
   max-width: 34rem;
   margin: 0.8rem auto 0;
@@ -1096,7 +1308,7 @@ header.scrolled {
 #PopupSignupForm_0,
 .mc-modal,
 .mc-banner {
-  z-index: 60 !important;
+  z-index: 70 !important;
 }
 
 #PopupSignupForm_0 iframe,

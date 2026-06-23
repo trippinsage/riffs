@@ -227,15 +227,103 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ==================================================================
-     8. NEWSLETTER SIGNUP
+     8. CONTACT PREVIEW
+  ================================================================== */
+  const contactDialog = document.getElementById("contact-dialog");
+  const contactPanel = contactDialog?.querySelector(".site-dialog-panel");
+  let contactReturnFocus = null;
+
+  function openContactDialog(trigger) {
+    if (!contactDialog) return;
+    contactReturnFocus = trigger;
+    contactDialog.hidden = false;
+    document.body.classList.add("dialog-open");
+    requestAnimationFrame(() => contactPanel?.focus());
+  }
+
+  function closeContactDialog() {
+    if (!contactDialog || contactDialog.hidden) return;
+    contactDialog.hidden = true;
+    document.body.classList.remove("dialog-open");
+    contactReturnFocus?.focus();
+  }
+
+  document.querySelectorAll("[data-contact-open]").forEach(trigger => {
+    trigger.addEventListener("click", () => openContactDialog(trigger));
+  });
+
+  contactDialog?.querySelectorAll("[data-dialog-close]").forEach(trigger => {
+    trigger.addEventListener("click", closeContactDialog);
+  });
+
+  /* ==================================================================
+     9. NEWSLETTER SIGNUP
   ================================================================== */
   const newsletterBtn = document.getElementById("newsletter-signup");
   const newsletterStatus = document.getElementById("newsletter-status");
   const newsletterFallback = document.getElementById("newsletter-fallback");
+  const newsletterDialog = document.getElementById("newsletter-dialog");
+  const newsletterPanel = newsletterDialog?.querySelector(".site-dialog-panel");
+  const newsletterDialogStatus = document.getElementById("newsletter-dialog-status");
+  const newsletterDialogFallback = newsletterDialog?.querySelector(".newsletter-dialog-fallback");
+  const newsletterLoader = newsletterDialog?.querySelector(".newsletter-loader");
+
+  function setNewsletterDialog(open) {
+    if (!newsletterDialog) return;
+    newsletterDialog.hidden = !open;
+    document.body.classList.toggle("dialog-open", open);
+    if (open) requestAnimationFrame(() => newsletterPanel?.focus());
+  }
+
+  function setNewsletterDialogMessage(message, showFallback = false) {
+    if (newsletterDialogStatus) newsletterDialogStatus.textContent = message;
+    if (newsletterDialogFallback) newsletterDialogFallback.hidden = !showFallback;
+    if (newsletterLoader) newsletterLoader.hidden = showFallback;
+  }
+
+  function findVisibleMailchimpForm() {
+    const candidates = document.querySelectorAll(
+      "#PopupSignupForm_0, .mc-modal, .mc-banner, iframe[src*='mailchimp'], iframe[src*='form-assets']"
+    );
+    return Array.from(candidates).find(element => {
+      const style = window.getComputedStyle(element);
+      return !element.hidden && style.display !== "none" && style.visibility !== "hidden" && element.getClientRects().length > 0;
+    });
+  }
+
+  function waitForMailchimpForm(timeout = 7000) {
+    const started = Date.now();
+    const timer = window.setInterval(() => {
+      if (findVisibleMailchimpForm()) {
+        window.clearInterval(timer);
+        setNewsletterDialog(false);
+        if (newsletterStatus) newsletterStatus.textContent = "";
+        return;
+      }
+
+      if (Date.now() - started >= timeout) {
+        window.clearInterval(timer);
+        setNewsletterDialogMessage("The signup form did not appear. Your browser may be blocking it.", true);
+        if (newsletterStatus) newsletterStatus.textContent = "Mailchimp did not open. An email signup option is available.";
+        if (newsletterFallback) newsletterFallback.hidden = false;
+        if (newsletterBtn) {
+          newsletterBtn.disabled = false;
+          const label = newsletterBtn.querySelector("span");
+          if (label) label.textContent = "Sign Up for Deals";
+        }
+      }
+    }, 150);
+  }
+
+  newsletterDialog?.querySelectorAll("[data-newsletter-close]").forEach(trigger => {
+    trigger.addEventListener("click", () => {
+      setNewsletterDialog(false);
+      newsletterBtn?.focus();
+    });
+  });
 
   if (newsletterBtn) {
     const mailchimpSrc = newsletterBtn.dataset.mailchimpSrc;
-    const fallbackHref = newsletterBtn.dataset.fallbackHref || newsletterFallback?.href;
     const defaultLabel = newsletterBtn.querySelector("span")?.textContent || newsletterBtn.textContent.trim();
 
     const setNewsletterStatus = message => {
@@ -253,16 +341,29 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     newsletterBtn.addEventListener("click", () => {
+      setNewsletterDialog(true);
+      setNewsletterDialogMessage("Connecting securely to Mailchimp…");
+
       if (!mailchimpSrc) {
         showNewsletterFallback();
-        if (fallbackHref) window.location.href = fallbackHref;
+        setNewsletterDialogMessage("Mailchimp is not configured right now. You can email Riff's to sign up.", true);
         return;
       }
 
       const existingScript = document.querySelector("script[data-mailchimp-loader]");
       if (existingScript) {
-        setNewsletterStatus(existingScript.dataset.loaded === "true" ? "Signup form loaded." : "Signup form is loading.");
-        showNewsletterFallback();
+        if (findVisibleMailchimpForm()) {
+          setNewsletterDialog(false);
+          return;
+        }
+
+        setNewsletterStatus(existingScript.dataset.loaded === "true" ? "Mailchimp is already loaded." : "Signup form is loading.");
+        if (existingScript.dataset.loaded === "true") {
+          setNewsletterDialogMessage("Mailchimp has already loaded for this visit. If its form is not visible, use the email option below.", true);
+          showNewsletterFallback();
+        } else {
+          waitForMailchimpForm();
+        }
         return;
       }
 
@@ -278,31 +379,59 @@ document.addEventListener("DOMContentLoaded", () => {
       script.addEventListener("load", () => {
         script.dataset.loaded = "true";
         setNewsletterLoading(false);
-        setNewsletterStatus("Signup form should appear shortly.");
-        window.setTimeout(() => {
-          const popupVisible = document.querySelector("#PopupSignupForm_0, .mc-modal, .mc-banner, iframe[src*='mailchimp'], iframe[src*='form-assets']");
-          if (!popupVisible) {
-            setNewsletterStatus("Signup form is ready. Use the email fallback if it does not appear.");
-            showNewsletterFallback();
-          } else {
-            setNewsletterStatus("");
-          }
-        }, 4500);
+        setNewsletterStatus("Signup form is opening.");
       });
 
       script.addEventListener("error", () => {
         setNewsletterLoading(false);
         setNewsletterStatus("Signup form could not load.");
         showNewsletterFallback();
-        if (fallbackHref) window.location.href = fallbackHref;
+        setNewsletterDialogMessage("Mailchimp could not load. You can email Riff's to sign up instead.", true);
       });
 
       document.body.appendChild(script);
+      waitForMailchimpForm();
     });
   }
 
+  document.addEventListener("keydown", event => {
+    const activeDialog = newsletterDialog && !newsletterDialog.hidden
+      ? newsletterDialog
+      : (contactDialog && !contactDialog.hidden ? contactDialog : null);
+
+    if (event.key === "Tab" && activeDialog) {
+      const focusable = Array.from(activeDialog.querySelectorAll(
+        "a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex='-1'])"
+      )).filter(element => !element.hidden && element.getClientRects().length > 0);
+
+      if (focusable.length) {
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (!focusable.includes(document.activeElement)) {
+          event.preventDefault();
+          (event.shiftKey ? last : first).focus();
+        } else if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+      return;
+    }
+
+    if (event.key !== "Escape") return;
+    if (newsletterDialog && !newsletterDialog.hidden) {
+      setNewsletterDialog(false);
+      newsletterBtn?.focus();
+      return;
+    }
+    closeContactDialog();
+  });
+
   /* ==================================================================
-     9. SERVICE WORKER
+     10. SERVICE WORKER
   ================================================================== */
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {

@@ -2,7 +2,7 @@
   "name": "Riff's Department Store",
   "short_name": "Riff's",
   "description": "Find Riff's Department Store locations, departments, and local contact information across Newfoundland and Labrador.",
-  "id": "https://www.riffs.ca/",
+  "id": "https://riffs.ca/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

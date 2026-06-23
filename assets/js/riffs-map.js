@@ -198,14 +198,16 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---------------------------------------------------------
      SHOW STORE INFO BELOW MAP
   --------------------------------------------------------- */
-  function showStoreInfo(i) {
+  function showStoreInfo(i, moveMap = true) {
     const store = stores[i];
     const marker = markers[i];
     if (!store || !marker) return;
 
     const telHref = getTelHref(store.phone);
 
-    map.flyTo([store.coords.lat, store.coords.lng], 13, { duration: 1.1 });
+    if (moveMap) {
+      map.flyTo([store.coords.lat, store.coords.lng], 13, { duration: 1.1 });
+    }
 
     // highlight marker
     if (activeMarker) activeMarker.setZIndexOffset(0);
@@ -281,13 +283,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   useLocationBtn?.addEventListener("click", () => {
+    if (!window.isSecureContext) {
+      showMapStatus("Location requires a secure HTTPS connection. Choose a store from the list instead.");
+      return;
+    }
+
     if (!navigator.geolocation) {
       showMapStatus("Location is not available in this browser.");
       return;
     }
 
     useLocationBtn.disabled = true;
-    useLocationBtn.textContent = "Locating";
+    useLocationBtn.setAttribute("aria-busy", "true");
+    useLocationBtn.textContent = "Finding Location…";
+    showMapStatus("Requesting your device location…");
 
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -309,31 +318,45 @@ document.addEventListener("DOMContentLoaded", () => {
         }).addTo(map);
 
         if (nearest) {
+          const nearestStore = stores[nearest.index];
+          const distanceKm = nearest.distance / 1000;
           select.value = nearest.index;
-          showStoreInfo(nearest.index);
-          showMapStatus(`Nearest store: ${stores[nearest.index].name}.`);
+          showStoreInfo(nearest.index, false);
+          map.fitBounds(
+            L.latLngBounds([
+              userLatLng,
+              [nearestStore.coords.lat, nearestStore.coords.lng]
+            ]),
+            { padding: [52, 52], maxZoom: 12 }
+          );
+          showMapStatus(
+            `Nearest store: ${nearestStore.name}, approximately ${distanceKm < 10 ? distanceKm.toFixed(1) : Math.round(distanceKm)} km away. ` +
+            `Location accuracy is about ${Math.round(position.coords.accuracy)} metres.`
+          );
         }
 
         useLocationBtn.disabled = false;
+        useLocationBtn.removeAttribute("aria-busy");
         useLocationBtn.textContent = "Use My Location";
       },
-      () => {
-        showMapStatus("We could not access your location. You can still choose a store from the list.");
+      error => {
+        const messages = {
+          1: "Location permission was not granted. Allow location access in your browser settings, or choose a store from the list.",
+          2: "Your device could not determine a location. Check that location services are enabled, or choose a store from the list.",
+          3: "Finding your location took too long. Try again where your device has a clearer signal, or choose a store from the list."
+        };
+        showMapStatus(messages[error.code] || "We could not determine your location. Choose a store from the list instead.");
         useLocationBtn.disabled = false;
+        useLocationBtn.removeAttribute("aria-busy");
         useLocationBtn.textContent = "Use My Location";
       },
-      { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 }
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
     );
   });
 
   function showMapStatus(message) {
-    let status = document.getElementById("map-status");
-    if (!status) {
-      status = document.createElement("p");
-      status.id = "map-status";
-      status.className = "map-status";
-      mapDiv.parentElement?.appendChild(status);
-    }
+    const status = document.getElementById("map-status");
+    if (!status) return;
     status.textContent = message;
   }
 
