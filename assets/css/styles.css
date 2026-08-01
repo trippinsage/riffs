@@ -142,37 +142,6 @@ header.scrolled {
   text-align: center;
 }
 
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.6rem;
-  max-width: 36rem;
-  margin: 2rem auto 0;
-}
-
-.hero-stats div {
-  min-width: 0;
-  padding: 0.9rem 0.5rem;
-  border-top: 3px solid var(--c-brand);
-  background: #fff;
-  box-shadow: var(--shadow-sm);
-}
-
-.hero-stats dt {
-  color: var(--c-brand);
-  font-size: clamp(1.35rem, 5vw, 2rem);
-  font-weight: 900;
-  line-height: 1;
-}
-
-.hero-stats dd {
-  margin-top: 0.35rem;
-  color: var(--c-muted);
-  font-size: clamp(0.72rem, 2vw, 0.86rem);
-  font-weight: 800;
-  line-height: 1.3;
-  text-transform: uppercase;
-}
 
 .default-hero-brand {
   display: grid;
@@ -204,6 +173,81 @@ header.scrolled {
   text-align: center;
 }
 
+.flash-sale-hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 247, 237, 0.92), rgba(255, 255, 255, 0.96) 58%),
+    radial-gradient(circle at top right, rgba(236, 72, 153, 0.2), transparent 35%),
+    linear-gradient(120deg, rgba(220, 38, 38, 0.08), transparent 40%);
+  border-bottom: 1px solid #f5e1d8;
+}
+
+.flash-sale-hero-inner {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+  min-height: clamp(30rem, 68vh, 42rem);
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.flash-sale-copy {
+  min-width: 0;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 42rem;
+}
+
+.flash-sale-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  padding: 0.7rem 1.2rem;
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.flash-sale-hero h1 {
+  max-width: 12ch;
+  margin: 0 auto;
+  color: #111827;
+  font-size: clamp(3rem, 10vw, 5.25rem);
+  font-weight: 900;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.flash-sale-visual {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+}
+
+.flash-sale-visual-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: #fde8e8;
+  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.12);
+}
+
+.flash-sale-visual-inner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 @media (min-width: 640px) {
   .hero-actions {
     display: flex;
@@ -217,16 +261,39 @@ header.scrolled {
 }
 
 @media (max-width: 639px) {
-  .default-hero-inner {
+  .default-hero-inner,
+  .flash-sale-hero-inner {
     gap: 1.75rem;
     min-height: auto;
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
   }
 
-  .hero-actions,
-  .hero-stats {
+  .flash-sale-visual {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .flash-sale-visual-inner {
+    border-radius: 1rem;
+  }
+
+  .flash-sale-copy {
+    max-width: 100%;
+  }
+
+  .flash-sale-badge {
+    font-size: 0.8rem;
+    padding: 0.65rem 1rem;
+  }
+
+  .hero-actions {
     margin-top: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
   }
 
   .default-hero-brand {
@@ -235,20 +302,23 @@ header.scrolled {
 }
 
 @media (min-width: 1024px) {
-  .default-hero-inner {
+  .default-hero-inner,
+  .flash-sale-hero-inner {
     grid-template-columns: minmax(0, 1.05fr) minmax(21rem, 0.95fr);
     gap: 4rem;
   }
 
-  .default-hero-copy {
+  .default-hero-copy,
+  .flash-sale-copy {
     text-align: left;
   }
 
-  .default-hero h1 {
+  .flash-sale-hero h1 {
     font-size: clamp(4rem, 7vw, 6.5rem);
   }
 
   .default-hero h1,
+  .flash-sale-hero h1,
   .hero-lead,
   .hero-actions,
   .hero-stats {
