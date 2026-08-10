@@ -37,7 +37,21 @@ body {
 
 body {
   background: #fff;
+  color: var(--c-ink);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+:where(a, button, select, summary):focus-visible {
+  outline: 3px solid #fbbf24;
+  outline-offset: 3px;
 }
 
 img,
@@ -194,6 +208,262 @@ header.scrolled {
   width: 100%;
   aspect-ratio: 3012 / 1800;
   object-fit: cover;
+}
+
+.sale-hero {
+  position: relative;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.sale-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(235, 27, 33, 0.06), transparent 28%);
+  pointer-events: none;
+}
+
+.sale-hero-inner {
+  position: relative;
+  z-index: 1;
+  align-items: stretch;
+}
+
+.sale-hero-copy-card {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 32px;
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.08);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sale-hero-copy-card:hover,
+.sale-hero-copy-card:focus-within {
+  transform: translateY(-2px);
+  box-shadow: 0 28px 65px rgba(15, 23, 42, 0.12);
+}
+
+.sale-kicker {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(235, 27, 33, 0.12);
+  color: var(--c-brand);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.035em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.sale-hero-copy-card h1 {
+  color: #111827;
+}
+
+.sale-hero-copy-card p {
+  color: #475569;
+}
+
+.sale-hero-intro {
+  max-width: 34rem;
+  margin-top: 0.75rem;
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  line-height: 1.6;
+}
+
+.sale-hero-benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.625rem;
+  max-width: 36rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sale-hero-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #fde2e2;
+  border-radius: 0.75rem;
+  background: #fff8f8;
+  color: #5f2528;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.sale-hero-benefits li::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--c-brand);
+  box-shadow: 0 0 0 3px rgba(235, 27, 33, 0.12);
+}
+
+.sale-hero-copy-card .btn {
+  min-width: 0;
+}
+
+.sale-hero-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  width: min(100%, 30rem);
+}
+
+.sale-hero-actions .btn {
+  display: inline-flex;
+  width: 100%;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 1rem;
+  border-radius: 0.875rem;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sale-hero-actions .btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.sale-hero-copy-card .btn-secondary {
+  background: #fff;
+  border-color: rgba(235, 27, 33, 0.9);
+  color: var(--c-brand);
+}
+
+.sale-hero-copy-card .btn-secondary:hover {
+  background: var(--c-brand);
+  color: #fff;
+}
+
+.sale-hero-card {
+  display: block;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #ffffff;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.10);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#flyer-card {
+  scroll-margin-top: 6rem;
+}
+
+.sale-hero-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 28px 75px rgba(15, 23, 42, 0.14);
+}
+
+.sale-hero-media {
+  position: relative;
+  aspect-ratio: 2625 / 3375;
+  overflow: hidden;
+  background: #fff;
+}
+
+.sale-hero-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 0.35s ease;
+}
+
+@media (max-width: 768px) {
+  .sale-hero-card,
+  .sale-hero-copy-card {
+    padding: 1rem;
+  }
+
+  .sale-hero-actions {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .sale-hero-actions .btn {
+    min-height: 3.5rem;
+    border-radius: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sale-hero-benefits {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sale-hero .btn {
+  min-width: 0;
+}
+
+.sale-hero .btn-secondary {
+  border-color: rgba(235, 27, 33, 0.9);
+  color: var(--c-brand);
+}
+
+.sale-hero .btn-secondary:hover {
+  color: #fff;
+}
+
+.sale-hero .btn:focus-visible,
+.sale-hero-card:focus-within {
+  outline: 3px solid #fbbf24;
+  outline-offset: 3px;
+}
+
+.sale-hero-stat {
+  border-radius: 28px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 1.5rem;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.sale-hero-stat:hover {
+  transform: translateY(-1px);
+  border-color: rgba(235, 27, 33, 0.2);
+}
+
+.sale-hero-stat p {
+  margin: 0;
+}
+
+.sale-hero-stat p:first-child {
+  color: #64748b;
+}
+
+.sale-hero-stat p:last-child {
+  margin-top: 0.75rem;
+  color: #111827;
+}
+
+@media (min-width: 768px) {
+  .challenge-card:hover .challenge-image,
+  .challenge-card:focus-visible .challenge-image {
+    transform: scale(1.02);
+  }
 }
 
 .default-hero-brand p {
@@ -480,7 +750,9 @@ header.scrolled {
    Buttons
    -------------------------------------------------------------------------- */
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   cursor: pointer;
   background: var(--c-brand);
@@ -489,8 +761,12 @@ header.scrolled {
   border-radius: var(--radius-md);
   font-weight: 700;
   font-size: 1rem;
+  line-height: 1.25;
   text-transform: uppercase;
   letter-spacing: 0.02em;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
   transition: var(--transition);
   box-shadow: var(--shadow-sm);
 }
