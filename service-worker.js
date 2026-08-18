@@ -1,10 +1,10 @@
-const CACHE_NAME = "riffs-store-v14";
+const CACHE_NAME = "riffs-store-v21";
 const CORE_ASSETS = [
   "/",
   "/index.html",
   "/legal.html",
   "/404.html",
-  "/manifest.json",
+  "/assets/img/favicon_ico/site.webmanifest",
   "/assets/css/tailwind.min.css",
   "/assets/css/styles.css",
   "/assets/js/script.js",
@@ -14,11 +14,13 @@ const CORE_ASSETS = [
   "/assets/img/background.webp",
   "/assets/img/heritage.webp",
   "/assets/img/challenge.webp",
-  "/assets/img/favicon_io/favicon.ico",
-  "/assets/img/favicon_io/favicon-32x32.png",
-  "/assets/img/favicon_io/apple-touch-icon.png",
-  "/assets/img/favicon_io/android-chrome-192x192.png",
-  "/assets/img/favicon_io/android-chrome-512x512.png"
+  "/assets/img/promotions/back-to-school-tshirt.webp",
+  "/assets/img/favicon_ico/favicon.ico",
+  "/assets/img/favicon_ico/favicon.svg",
+  "/assets/img/favicon_ico/favicon-32x32.png",
+  "/assets/img/favicon_ico/apple-touch-icon.png",
+  "/assets/img/favicon_ico/android-chrome-192x192.png",
+  "/assets/img/favicon_ico/android-chrome-512x512.png"
 ];
 
 self.addEventListener("install", event => {

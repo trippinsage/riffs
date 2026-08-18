@@ -1,7 +1,7 @@
 {
   "name": "Riff's Department Store",
   "short_name": "Riff's",
-  "description": "Find Riff's Department Store locations, departments, and local contact information across Newfoundland and Labrador.",
+  "description": "Riff's Department Store offers clothing, footwear, home goods, furniture, and family essentials across Newfoundland and Labrador.",
   "id": "https://riffs.ca/",
   "start_url": "/",
   "scope": "/",
@@ -13,16 +13,28 @@
   "theme_color": "#EB1B21",
   "icons": [
     {
-      "src": "/assets/img/favicon_io/android-chrome-192x192.png",
+      "src": "/assets/img/favicon_ico/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/favicon_ico/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/img/favicon_io/android-chrome-512x512.png",
+      "src": "/assets/img/favicon_ico/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/img/favicon_ico/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
