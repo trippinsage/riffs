@@ -292,8 +292,8 @@ header.scrolled {
   position: relative;
   overflow: hidden;
   background:
-    linear-gradient(120deg, rgba(235, 27, 33, 0.05), rgba(255, 255, 255, 0) 40%),
-    linear-gradient(180deg, #fff 0%, #fafbfc 100%);
+    linear-gradient(120deg, rgba(235, 27, 33, 0.06), rgba(25, 118, 116, 0.05) 46%, rgba(255, 255, 255, 0) 68%),
+    linear-gradient(180deg, #fff 0%, #f8fafc 100%);
   border-bottom: 1px solid #f0f1f3;
 }
 
@@ -318,7 +318,7 @@ header.scrolled {
   gap: 1.5rem;
   background: #fff;
   border: 1px solid #e8eaed;
-  border-radius: 20px;
+  border-radius: 8px;
   box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
   padding: clamp(1.5rem, 3.5vw, 2.5rem);
   transition: box-shadow var(--transition), transform var(--transition);
@@ -350,12 +350,12 @@ header.scrolled {
 
 .sale-hero-copy-card h1 {
   margin: 0;
-  max-width: 12ch;
+  max-width: 13ch;
   color: #111827;
   font-size: clamp(2.2rem, 6.5vw, 3.8rem);
   line-height: 1.05;
   font-weight: 900;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   text-wrap: balance;
   overflow-wrap: anywhere;
   transition: color var(--transition);
@@ -419,7 +419,7 @@ header.scrolled {
   display: inline-flex;
   align-items: center;
   padding: 0.5rem 0.85rem;
-  border-radius: 999px;
+  border-radius: 8px;
   background: #f1f5f9;
   border: 1px solid #e2e8f0;
   color: #475569;
@@ -437,7 +437,7 @@ header.scrolled {
 .sale-hero-card {
   display: block;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 8px;
   background: #fff;
   border: 1px solid #e8eaed;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
@@ -501,7 +501,7 @@ header.scrolled {
 
   .sale-hero-copy-card h1 {
     max-width: 100%;
-    font-size: clamp(2rem, 9vw, 2.8rem);
+    font-size: clamp(2rem, 8vw, 2.65rem);
   }
 
   .sale-hero-intro {
