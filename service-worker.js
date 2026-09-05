@@ -1,4 +1,4 @@
-const CACHE_NAME = "riffs-store-v23";
+const CACHE_NAME = "riffs-store-v33";
 const CORE_ASSETS = [
   "/",
   "/index.html",
@@ -10,11 +10,11 @@ const CORE_ASSETS = [
   "/assets/js/script.js",
   "/assets/js/riffs-map.js",
   "/assets/js/store-data.js",
+  "/assets/img/Riffs.webp",
   "/assets/img/riffs-red.webp",
   "/assets/img/background.webp",
   "/assets/img/heritage.webp",
   "/assets/img/challenge.webp",
-  "/assets/img/promotions/labour-day.webp",
   "/assets/img/favicon_ico/favicon.ico",
   "/assets/img/favicon_ico/favicon.svg",
   "/assets/img/favicon_ico/favicon-32x32.png",
@@ -63,7 +63,12 @@ self.addEventListener("fetch", event => {
           caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
           return response;
         })
-        .catch(() => caches.match(request).then(response => response || caches.match("/index.html")))
+        .catch(() => caches.match(request).then(response => {
+          if (response) return response;
+          return requestUrl.pathname === "/" || requestUrl.pathname === "/index.html"
+            ? caches.match("/index.html")
+            : caches.match("/404.html");
+        }))
     );
     return;
   }

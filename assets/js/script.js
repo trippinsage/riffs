@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     window.addEventListener("resize", () => {
-      if (window.innerWidth >= 1024) setMobileMenu(false);
+      if (window.getComputedStyle(menuBtn).display === "none") setMobileMenu(false);
     }, { passive: true });
   }
 
@@ -306,6 +306,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if (newsletterBtn) newsletterBtn.disabled = false;
         const label = newsletterBtn?.querySelector("span");
         if (label) label.textContent = "Sign Up for Deals";
+
+        if (document.querySelector("script[data-mailchimp-loader][data-loaded='true']")) {
+          setNewsletterDialog(false);
+          if (newsletterStatus) newsletterStatus.textContent = "";
+          return;
+        }
+
+        if (newsletterStatus) newsletterStatus.textContent = "Signup form could not load.";
+        if (newsletterFallback) newsletterFallback.hidden = false;
+        setNewsletterDialogMessage("The signup form could not load. You can email Riff's to sign up instead.", true);
       }
     }, 150);
   }
@@ -354,8 +364,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setNewsletterStatus(existingScript.dataset.loaded === "true" ? "Mailchimp is already loaded." : "Signup form is loading.");
         if (existingScript.dataset.loaded === "true") {
-          setNewsletterDialogMessage("Mailchimp has already loaded for this visit.", true);
-          showNewsletterFallback();
+          setNewsletterDialog(false);
+          setNewsletterStatus("");
         } else {
           waitForMailchimpForm();
         }
@@ -374,7 +384,8 @@ document.addEventListener("DOMContentLoaded", () => {
       script.addEventListener("load", () => {
         script.dataset.loaded = "true";
         setNewsletterLoading(false);
-        setNewsletterStatus("Signup form is opening.");
+        setNewsletterDialog(false);
+        setNewsletterStatus("");
       });
 
       script.addEventListener("error", () => {
