@@ -1,4 +1,4 @@
-const CACHE_NAME = "riffs-store-v33";
+const CACHE_NAME = "riffs-store-v42";
 const CORE_ASSETS = [
   "/",
   "/index.html",
@@ -70,6 +70,14 @@ self.addEventListener("fetch", event => {
             : caches.match("/404.html");
         }))
     );
+    return;
+  }
+
+  // Promo images (current-sale.*, the evergreen default) change independently
+  // of app releases and drive the sale popup's "does a sale exist" check —
+  // they must always reflect what's actually on disk, never a cached answer.
+  if (requestUrl.pathname.startsWith("/assets/img/promotions/")) {
+    event.respondWith(fetch(request));
     return;
   }
 

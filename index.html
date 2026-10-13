@@ -19,7 +19,7 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <link rel="canonical" href="https://riffs.ca/" />
-  <link rel="preload" as="image" href="/assets/img/Riffs.webp" type="image/webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="/assets/img/riffs-red.webp" type="image/webp" fetchpriority="high" />
 
   <!-- Open Graph -->
   <meta property="og:site_name" content="Riff's Department Store" />
@@ -244,6 +244,17 @@
           </svg>
         </button>
 
+        <!-- Sale popup re-open button (mobile) — only ever shown when a current-sale image exists -->
+        <button type="button" id="sale-trigger-mobile" data-sale-trigger
+                class="sale-trigger-btn sale-trigger-btn--icon lg:hidden ml-auto"
+                aria-label="View current sale" hidden>
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.59 13.41 13.41 20.59a2 2 0 0 1-2.82 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/>
+            <circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+          <span class="sale-trigger-dot" aria-hidden="true"></span>
+        </button>
+
         <!-- Desktop Nav -->
         <div class="hidden lg:flex items-center gap-4 xl:gap-6 ml-auto">
           <nav class="flex items-center gap-6" aria-label="Primary">
@@ -251,6 +262,15 @@
             <a href="#departments" class="text-gray-700 hover:text-brand font-semibold transition-colors">Departments</a>
             <a href="#locations" class="text-gray-700 hover:text-brand font-semibold transition-colors">Locations</a>
             <a href="#heritage" class="text-gray-700 hover:text-brand font-semibold transition-colors">Our Story</a>
+            <!-- Sale popup re-open button (desktop) — only ever shown when a current-sale image exists -->
+            <button type="button" id="sale-trigger-desktop" data-sale-trigger class="sale-trigger-btn" hidden>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20.59 13.41 13.41 20.59a2 2 0 0 1-2.82 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/>
+                <circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/>
+              </svg>
+              <span>Sale</span>
+              <span class="sale-trigger-dot" aria-hidden="true"></span>
+            </button>
             <a href="mailto:info@riffs.ca" class="bg-brand text-white font-bold px-5 py-2.5 rounded-lg hover:bg-brand-dark transition-colors shadow-sm">
               Contact Us
             </a>
@@ -291,7 +311,7 @@
           </dl>
         </div>
         <div class="default-hero-brand">
-          <img src="/assets/img/riffs-red.webp" alt="Riff's Department Store" width="960" height="960" fetchpriority="high" decoding="async" />
+          <img src="/assets/img/riffs-red.webp" alt="Riff's Department Store" width="960" height="960" decoding="async" />
         </div>
       </div>
     </section>
@@ -577,6 +597,36 @@
 
   </main>
 
+  <!--
+    SALE POPUP — fully automatic, no HTML edits needed.
+
+    To run a sale: drop a file named exactly "current-sale" (.webp, .jpg,
+      .jpeg, or .png) into /assets/img/promotions/. On the next page load
+      it pops up once automatically, and the "Sale" button that appears
+      in the header (both desktop and mobile) reopens it any time after
+      that. No file there -> nothing happens: no popup, no header button.
+    To end a sale: remove that file (e.g. move it into
+      /assets/img/promotions/archive/ to keep it for next time).
+    Any size/orientation works — the image scales to fit the popup.
+  -->
+  <div id="sale-popup" class="site-dialog sale-popup" role="dialog" aria-modal="true" aria-labelledby="sale-popup-heading" hidden>
+    <button type="button" class="site-dialog-backdrop" data-sale-popup-close aria-label="Close"></button>
+    <div class="site-dialog-panel sale-popup-panel" tabindex="-1">
+      <button type="button" class="site-dialog-close" data-sale-popup-close aria-label="Close sale popup">&times;</button>
+      <p class="site-dialog-kicker">Happening Now</p>
+      <h2 id="sale-popup-heading">Our Current Sale</h2>
+      <div class="sale-popup-image-wrap">
+        <img id="sale-popup-img" src="" alt="" />
+      </div>
+      <div class="sale-popup-actions">
+        <a href="https://www.facebook.com/riffsstore" target="_blank" rel="noopener noreferrer" class="btn btn-secondary sale-popup-fb">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          View on Facebook
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- CONTACT PREVIEW -->
   <div id="contact-dialog" class="site-dialog" role="dialog" aria-modal="true" aria-labelledby="contact-dialog-title" hidden>
     <button type="button" class="site-dialog-backdrop" data-dialog-close aria-label="Close contact preview"></button>
@@ -607,6 +657,7 @@
       <p class="site-dialog-note">Signup is handled by Mailchimp. You can unsubscribe at any time.</p>
     </div>
   </div>
+
 
   <!-- FOOTER -->
   <footer class="bg-gray-900 text-white pt-12 pb-8 md:pt-16 md:pb-10 mt-auto">
